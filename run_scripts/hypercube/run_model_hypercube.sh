@@ -1,6 +1,6 @@
 #!/bin/bash            
 #SBATCH --time=200:00:00     # Walltime            
-#SBATCH --mem=32G  # memory/cpu            
+#SBATCH --mem=128G  # memory/cpu            
 #SBATCH --ntasks 16            
 #SBATCH --nodes 1-1            
 #SBATCH --job-name=run_net
