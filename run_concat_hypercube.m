@@ -30,6 +30,7 @@ function run_concat_hypercube(name)
     
     assort_concat = zeros(config.num_pars, 1);
     G_concat = zeros(config.num_pars, 1);
+    gconn_concat = zeros(config.num_pars, 1);
     pks_concat = zeros(config.num_pars, 1);
     pks_p1_concat = zeros(config.num_pars, 1);
     pks_p2_concat = zeros(config.num_pars, 1);
@@ -41,6 +42,7 @@ function run_concat_hypercube(name)
         
         assort_concat(i) = assort;
         G_concat(i)      = pvals(1);
+        gconn_concat(i)      = pvals(2);
         pks_concat(i)    = mean(sum(net.sys.pk_locs));
         pks_p1_concat(i)    = mean(sum(net.sys.pk_locs(:, logical(net.sys.pops))));
         pks_p2_concat(i)    = mean(sum(net.sys.pk_locs(:, ~logical(net.sys.pops))));

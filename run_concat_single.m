@@ -30,6 +30,7 @@ function run_concat_single(name)
     
     assort_concat = zeros(length(assort_all), config.num_pars);
     G_concat = zeros(length(assort_all), config.num_pars);
+    gconn_concat = zeros(length(assort_all), config.num_pars);
     pks_concat = zeros(length(assort_all), config.num_pars);
     pks_p1_concat = zeros(length(assort_all), config.num_pars);
     pks_p2_concat = zeros(length(assort_all), config.num_pars);
@@ -42,6 +43,7 @@ function run_concat_single(name)
             
             assort_concat(i,j) = assort;
             G_concat(i,j)      = pvals(1);
+            gconn_concat(i,j)  = pvals(2);
             pks_concat(i,j)    = mean(sum(net.sys.pk_locs));
             pks_p1_concat(i,j)    = mean(sum(net.sys.pk_locs(:, logical(net.sys.pops))));
             pks_p2_concat(i,j)    = mean(sum(net.sys.pk_locs(:, ~logical(net.sys.pops))));
