@@ -1,0 +1,17 @@
+*.mat
+*.DS_Store
+*.err
+*.stats
+*.out
+*.mp4
+*.avi
+*.jpg
+*.png
+*.tif
+*.svg
+*.eps
+*.fig
+
+!**/cube.mat
+!**/out_concat.mat
+!**/parameters.mat
