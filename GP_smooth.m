@@ -1,5 +1,5 @@
 %load data
-load(fullfile('results_hypercube_attempt_05', 'out_concat.mat'))
+load(fullfile('results_hypercube_attempt_04', 'out_concat.mat'))
 X = assort_concat;
 Y = G_concat;
 Z = pks_concat;
