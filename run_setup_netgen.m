@@ -84,7 +84,7 @@ function pars = run_setup_netgen(name, seed, seed_swap, seed_netgen)
      
      
      % network generation
-     seed(seed_netgen);
+     rng(seed_netgen);
      
     conn_check = false;
     while ~conn_check 

@@ -8,7 +8,7 @@ pos = length(seed);
 %    warning('Abnormally large value(s) may cause long processing time');
 %end
 %rand('state',sum(100*clock));
-Net = zeros(Nodes, Nodes, 'single');
+Net = zeros(Nodes, Nodes);
 Net(1:pos,1:pos) = seed;
 sumlinks = sum(sum(Net));
 while pos < Nodes
