@@ -23,11 +23,18 @@
 % ==========
 % mypars : To distribute the full set of parameters, this array contains a
 % subset to run
-% name   : directory name
+% name   : the name given to run_setup_single when setting up the run
+% keep_traj: if true, then keep the trajectory (which makes huge files and
+% is false by default)
 %=========================================================================%
-function run_model_single(mypars, name)
+function run_model_single(mypars, name, keep_traj)
 
     addpath('functions');
+    
+    if nargin < 3
+        keep_traj = false;
+    end
+        
     config = run_setup_single_config(name, 0, 0);
     dout = ['results_single_', config.name];
     clear config;
@@ -65,8 +72,11 @@ function run_model_single(mypars, name)
                 net.sys.G = config.pars(j,1);
                 net.run_ode(config.Tmax);
                 net.sys.run_stats(pops_all(:,i));
-                net.sys.y = [];
-                net.sys.t = [];
+                
+                if ~keep_traj
+                    net.sys.y = [];
+                    net.sys.t = [];
+                end
                 
                 gl = net.sys.gl;
                 gconns = net.gconns;

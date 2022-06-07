@@ -55,7 +55,10 @@ function [population_all, assort_all] = swapper(iterations, population, connecti
         direction = ~direction;
         iterations = - iterations;
     end
-
+    if isempty(locations)
+        alpha = 0;
+    end
+    
     
     % I'm Ricky Bobby, I wanna go fast!
     connections = sparse(connections);
@@ -86,18 +89,22 @@ function [population_all, assort_all] = swapper(iterations, population, connecti
     
     % Identify shells of the spherical networks and which nodes are in
     % which shells
-    num_bins = 8;
-    node_dists =(vecnorm(locations, 2, 2));
-    
-    [~, shell_centers] = hist(node_dists, num_bins);
-    
-    shell_ends = shell_centers + (max(node_dists) - shell_centers(end)) + 1e-4;
-    shell_ends = [0, shell_ends, Inf];
-    
-    node_bins = node_dists < shell_ends;
-    node_bins = ~node_bins;
-    node_bins = sum(node_bins, 2);
+    if ~isempty(locations)
+        num_bins = 8;
+        node_dists =(vecnorm(locations, 2, 2));
 
+        [~, shell_centers] = hist(node_dists, num_bins);
+
+        shell_ends = shell_centers + (max(node_dists) - shell_centers(end)) + 1e-4;
+        shell_ends = [0, shell_ends, Inf];
+
+        node_bins = node_dists < shell_ends;
+        node_bins = ~node_bins;
+        node_bins = sum(node_bins, 2);
+    else
+        num_bins = 2;
+        node_bins = ones(length(connections), 1);
+    end
     
     % A very nice while loop
     while its < (iterations+1)
@@ -118,6 +125,7 @@ function [population_all, assort_all] = swapper(iterations, population, connecti
         pop1_shell_probs = 1 ./ pop1_shell_bins;
         pop2_shell_probs = 1 ./ pop2_shell_bins;
         
+
         pop1_node_list = [(1:sum(population))',pop1_shell_probs(pop1_node_bins)'];
         pop2_node_list = [(1:sum(~population))',pop2_shell_probs(pop2_node_bins)'];
         
@@ -127,7 +135,6 @@ function [population_all, assort_all] = swapper(iterations, population, connecti
         joint_prob = m2(:) .* n2(:);
         mean_joint_prob = mean(joint_prob);
         no_prob = mean_joint_prob * ones(length(m2(:)), 1);
-  
         
         total_prob = alpha * joint_prob + (1 - alpha) * no_prob;
         combination_list = [m(:), n(:), total_prob];

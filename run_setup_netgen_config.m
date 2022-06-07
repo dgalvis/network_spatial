@@ -1,11 +1,11 @@
 %=========================================================================%
-% Function: run_setup_hypercube_config
+% Function: run_setup_netgen_config
 % Author: Daniel Galvis
 %
 % 05/03/2021
 % code generation
 %
-% Parameters for run_setup_hypercube.m prior to being fed into run_model_hypercube.m
+% Parameters for run_setup_netgen.m prior to being fed into run_model_netgen.m
 %
 % Parameters
 % ==========
@@ -21,26 +21,23 @@
 % gl2stdrng = 2x1 array, std gkatp of population 2
 % Tmax     = time to run the ode of the network
 % seed     = seed for random number generator of hypercube
-% radius   = radius of the islet
 % name     = folder name for this run
 %
 % ric_scale= variance of initial conditions IC*(1 + randn/ric_scale)
 % method      : local - local sortedness
-%               global - global sortedness
-% alpha       : [0,1] - 0 - swap pairs random
-%                       1 - swap pairs depend on radius
-%                       (0,1) - in between   
+%               global - global sortedness  
 % direction - assort (true), disassort (false)
 % meth_full - full assort (true), node assort (false)
 % seed_swap - seed for run_model_hypercube (swapping and IC)
+% seed_netgen - seed for network generation
 %=========================================================================%
 
-function out = run_setup_hypercube_config(name, seed, seed_swap)
+function out = run_setup_netgen_config(name, seed, seed_swap, seed_netgen)
 
     out.model = 'srk'; % 'fn' or 'srk'
     out.num_pars = 10000;
-    out.Gfracrng = [0.35, 0.35];
-    out.gconnrng = [1,10];
+    out.Gfracrng = [0.2, 0.6];
+    out.gconnrng = [1,1];
     
     
     out.poprng   = [0.1, 0.1]; % pop1 frac range
@@ -54,17 +51,21 @@ function out = run_setup_hypercube_config(name, seed, seed_swap)
     out.Tmax = 500000;
     out.seed = seed; % seed for hypercube
     out.seed_swap = seed_swap; % seed for run_hypercube.m
+    out.seed_netgen = seed_netgen; % seed for random network generator
     
     out.direction = true; % forward - assort, backward - disassort
     
     out.ric_scale = 6; % recommend [3, Inf] (yes you can use Inf)
+    
+    out.netgen_method = 'WS'; % 'WS' - watts_strogatz
+                              % 'BA' - barabasi_albert
+                              
+    out.num_nodes = 1000; % number of nodes for general network
+    out.num_conns = 12; % average degree of general network
+    out.rewiring_p = 0.2; % for 'WS' only, ignored for 'BA'
+    
     out.method = 'local'; % global or local sortedness
-    out.alpha  = 1; %[0,1] - 0 - swap pairs random
-                    %        1 - swap pairs depend on radius
-                    %        (0,1) - in between
-    
-    
-    out.radius = 5.55;
+
     out.name = ['attempt_', name];
     
 

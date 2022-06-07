@@ -1,11 +1,11 @@
 %=========================================================================%
-% Function: run_setup_hypercube
+% Function: run_setup_netgen
 % Author: Daniel Galvis
 %
 % 05/03/2021
 % code generation
 %
-% For parameters in run_setup_hypercube_config, run a latin hypercube on the
+% For parameters in run_setup_netgen_config, run a latin hypercube on the
 % bounds. Save the result in config.pars inside the folder config.name in
 % with the name cube.mat
 
@@ -13,18 +13,20 @@
 % ==========
 % seed     = seed for random number generator of hypercube
 % name     = folder name for this run
-% seed_swap - seed for run_model_hypercube.m (swapping and IC)
+% seed_swap = seed for run_model_hypercube.m (swapping and IC)
+% seed_netgen = seed for network generation
 %=========================================================================%
 
-function pars = run_setup_hypercube(name, seed, seed_swap)
+function pars = run_setup_netgen(name, seed, seed_swap, seed_netgen)
     addpath('functions');
+    addpath('functions_netgen');
     
     % Load in the ranges
-    config = run_setup_hypercube_config(name, seed, seed_swap);
+    config = run_setup_netgen_config(name, seed, seed_swap, seed_netgen);
     
     
     rng(config.seed);
-    dout = ['results_hypercube_', num2str(config.name)];
+    dout = ['results_netgen_', num2str(config.name)];
     mkdir(dout);
 
     
@@ -81,12 +83,28 @@ function pars = run_setup_hypercube(name, seed, seed_swap)
      config.pars = pars;
      
      
+     % network generation
+     seed(seed_netgen);
+     
+    conn_check = false;
+    while ~conn_check 
+         if strcmp(config.netgen_method, 'WS')
+             net = watts_strogatz(config.num_nodes, config.num_conns / 2, config.rewiring_p);
+         elseif strcmp(config.netgen_method, 'BA')
+             seed_net = watts_strogatz(config.num_conns + 1, config.num_conns / 2, 0);
+             net = barabasi_albert(config.num_nodes, config.num_conns / 2, seed_net);
+             config.net_init = seed_net;
+         end
+         config.net_conns = net;
+         
+         if max(conncomp(graph(net))) == 1
+             conn_check = true;
+         end
+         
+    end
+     
      % save
      fout = fullfile(dout, 'cube.mat');
      save(fout, 'config', '-v7.3');
 end    
-    
-    
-    
-    
     
