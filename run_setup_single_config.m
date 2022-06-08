@@ -26,8 +26,10 @@
 % radius   = radius of the islet
 % name     = folder name for this run
 %
-% method      : local - local sortedness
-%               global - global sortedness
+% method_sort      : local - local sortedness
+%                  : global - global sortedness
+% method_swap      : local - local swapping
+%                  : global - global swapping
 % alpha       : [0,1] - 0 - swap pairs random
 %                       1 - swap pairs depend on radius
 %                       (0,1) - in between   
@@ -56,7 +58,8 @@ function out = run_setup_single_config(name, seed, seed2)
     out.radius = 5.55;
     out.name = ['attempt_', name];
     
-    out.method = 'global'; % global or local sortedness
+    out.method_sort = 'local'; % global or local sortedness
+    out.method_swap = 'local'; % global or local swapping
     out.alpha  = 1; %[0,1] - 0 - swap pairs random
                     %        1 - swap pairs depend on radius
                     %        (0,1) - in between

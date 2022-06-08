@@ -24,14 +24,15 @@
 % direction: bool
 %       true: run swapper forward (assort)
 %       false: run swapper backward (disassort)
-% population array of logicals, optional
-%      add in the initial population of 1 and 2 array
-% method      : local - local sortedness
-%               global - global sortedness
+% method_sort      : local - local sortedness
+%                  : global - global sortedness
+% method_swap      : local - local swapping
+%                  : global - global swapping
 % alpha       : [0,1] - 0 - swap pairs random
 %                       1 - swap pairs depend on radius
 %                       (0,1) - in between           
-%
+% population array of logicals, optional
+%      add in the initial population of 1 and 2 array
 % Returns
 % =======
 % out : array length(connections) x number of iterations
@@ -51,7 +52,7 @@
 %
 %=========================================================================%
 
-function [out, vals, assort_all] = swapping_algorithm(connections, locations, pars, direction, method, alpha, population)
+function [out, vals, assort_all] = swapping_algorithm(connections, locations, pars, direction, method_sort, method_swap, alpha, population)
 
 
     % Define important parameters
@@ -61,13 +62,16 @@ function [out, vals, assort_all] = swapping_algorithm(connections, locations, pa
     
     
     if nargin < 5
-        method = 'local';
+        method_sort = 'local';
     end
     if nargin < 6
+        method_swap = 'global';
+    end
+    if nargin < 7
         alpha = 1; % 1 - total dependence on shell
                    % 0 - completely random
     end    
-    if nargin < 7
+    if nargin < 8
         % How many nodes in population 1?
         num_pop = round(num_nodes * frac_pop);
 
@@ -81,7 +85,7 @@ function [out, vals, assort_all] = swapping_algorithm(connections, locations, pa
     end
      
     % Run the swapper
-    [vals, assort_all] = swapper(iterations,  population, connections, locations, direction, method, alpha);
+    [vals, assort_all] = swapper(iterations,  population, connections, locations, direction, method_sort, method_swap, alpha);
    
     % Assign values to population 1 and 2
     population1_vals = lognormals(pars(3), pars(5), [sum(vals(:,1)), 1]);

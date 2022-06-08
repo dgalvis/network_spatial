@@ -29,12 +29,13 @@ function out = run_swap_config()
     out.seed = 1;            % random number generator seed
 
     
-    out.method = 'global'; % global or local sortedness
+    out.method_sort = 'local'; % global or local sortedness
+    out.method_swap = 'local'; % global or local swapping
     out.alpha  = 1; %[0,1] - 0 - swap pairs random
                     %        1 - swap pairs depend on radius
                     %        (0,1) - in between
                     
-    out.name = 'both_global_1';   % directory will be called:
+    out.name = 'both_5';   % directory will be called:
                                 % results_assort_{out.name}
     
 end

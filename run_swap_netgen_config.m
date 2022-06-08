@@ -23,7 +23,7 @@ function out = run_swap_netgen_config()
                              % false - only go out.direction
     
     
-    out.netgen_method = 'WS'; % 'WS' - watts_strogatz
+    out.netgen_method = 'BA'; % 'WS' - watts_strogatz
                               % 'BA' - barabasi_albert
                               
     out.num_nodes = 1000; % number of nodes for general network
@@ -34,9 +34,10 @@ function out = run_swap_netgen_config()
     out.seed = 1;            % random number generator seed
     out.seed_netgen = 1;     % random number for network generation
 
-    out.method = 'global'; % global or local sortedness
+    out.method_sort = 'global'; % global or local sortedness
+    out.method_swap = 'local'; % global or local swapping
                     
-    out.name = 'forward_global_2';   % directory will be called:
+    out.name = 'forward_gloloc_2';   % directory will be called:
                                 % results_assort_{out.name}
     
 end

@@ -24,8 +24,13 @@
 % name     = folder name for this run
 %
 % ric_scale= variance of initial conditions IC*(1 + randn/ric_scale)
-% method      : local - local sortedness
-%               global - global sortedness  
+% method_sort      : local - local sortedness
+%                  : global - global sortedness
+% method_swap      : local - local swapping
+%                  : global - global swapping
+% alpha       : [0,1] - 0 - swap pairs random
+%                       1 - swap pairs depend on radius
+%                       (0,1) - in between   
 % direction - assort (true), disassort (false)
 % meth_full - full assort (true), node assort (false)
 % seed_swap - seed for run_model_hypercube (swapping and IC)
@@ -64,7 +69,8 @@ function out = run_setup_netgen_config(name, seed, seed_swap, seed_netgen)
     out.num_conns = 12; % average degree of general network
     out.rewiring_p = 0.2; % for 'WS' only, ignored for 'BA'
     
-    out.method = 'local'; % global or local sortedness
+    out.method_sort = 'local'; % global or local sortedness
+    out.method_swap = 'local'; % global or local swapping
 
     out.name = ['attempt_', name];
     

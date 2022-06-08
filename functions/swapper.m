@@ -22,8 +22,10 @@
 %               spatial locations in 3 space of the nodes
 % direction   : true - increase assortativity
 %               false - decrease assortativity
-% method      : local - local sortedness
-%               global - global sortedness
+% method_sort      : local - local sortedness
+%                  : global - global sortedness
+% method_swap      : local - local swapping
+%                  : global - global swapping
 % alpha       : [0,1] - 0 - swap pairs random
 %                       1 - swap pairs depend on radius
 %                       (0,1) - in between
@@ -40,12 +42,15 @@
 
 
 
-function [population_all, assort_all] = swapper(iterations, population, connections, locations, direction, method, alpha)
+function [population_all, assort_all] = swapper(iterations, population, connections, locations, direction, method_sort, method_swap, alpha)
     
     if nargin < 6
-        method = 'local';
+        method_sort = 'local';
     end
     if nargin < 7
+        method_swap = 'global';
+    end
+    if nargin < 8
         alpha = 1; % 1 - total dependence on shell
                    % 0 - completely random
     end
@@ -64,7 +69,7 @@ function [population_all, assort_all] = swapper(iterations, population, connecti
     connections = sparse(connections);
     
     % for global assortativity
-    if strcmp(method, 'global')
+    if strcmp(method_sort, 'global')
         dists = sparse(triu(distances(graph(connections))));
     end
     
@@ -79,10 +84,10 @@ function [population_all, assort_all] = swapper(iterations, population, connecti
     population_all(:,1) = population;    
     
     % Find full assortativity, this is always returned by assort_all
-    if strcmp(method, 'local')
+    if strcmp(method_sort, 'local')
         [pop1, pop2] = find_pops(connections, population);
         assort_all(1) =  assort_measure(pop1, pop2, connections, population); 
-    elseif strcmp(method, 'global')
+    elseif strcmp(method_sort, 'global')
         assort_all(1) = global_assort_measure(dists, population);
     end
         
@@ -132,14 +137,20 @@ function [population_all, assort_all] = swapper(iterations, population, connecti
         [m,n] = ndgrid(pop1_node_list(:,1), pop2_node_list(:,1));
         [m2, n2] = ndgrid(pop1_node_list(:,2), pop2_node_list(:,2));
         
-        joint_prob = m2(:) .* n2(:);
+        if strcmp(method_swap, 'local')
+            joint_prob = m2(:);
+            
+        elseif strcmp(method_swap, 'global')
+            joint_prob = m2(:) .* n2(:);
+            
+        end
+        
         mean_joint_prob = mean(joint_prob);
         no_prob = mean_joint_prob * ones(length(m2(:)), 1);
         
         total_prob = alpha * joint_prob + (1 - alpha) * no_prob;
         combination_list = [m(:), n(:), total_prob];
-       
-        
+            
         line_up = cumsum(combination_list(:,end));
         num_combos = length(line_up);
         
@@ -148,13 +159,13 @@ function [population_all, assort_all] = swapper(iterations, population, connecti
         % increases assortativity
         success = false;
         
-        if strcmp(method, 'local')
+        if strcmp(method_sort, 'local')
             % Find the number of connections for pop1 onto pop1
             % and the number of connections for pop2 onto pop2
             [pop1, pop2] = find_pops(connections, population);
             % use that to calculate full assortativity for both
             [as,~,~] =  assort_measure(pop1, pop2, connections, population);
-        elseif strcmp(method, 'global')
+        elseif strcmp(method_sort, 'global')
             as = global_assort_measure(dists, population);
         end
         for i = 1:num_combos
@@ -165,16 +176,22 @@ function [population_all, assort_all] = swapper(iterations, population, connecti
             node2 = pop2_idx(combination_list(idx,2));
             nodes = [node1, node2];
             
+            if strcmp(method_swap, 'local') && (~connections(nodes(1), nodes(2)))
+                combination_list(idx, end) = 0;
+                line_up = cumsum(combination_list(:,end));
+                continue
+            end
+            
             % Swapped nodes
             population_aux = population;
             population_aux(nodes(1)) = population(nodes(2));
             population_aux(nodes(2)) = population(nodes(1));
                 
-            if strcmp(method, 'local')
+            if strcmp(method_sort, 'local')
                 % and in the swapped version
                 [pop1_aux, pop2_aux] = find_pops(connections, population_aux);
                 [as_aux,~,~] = assort_measure(pop1_aux, pop2_aux, connections, population_aux);    
-            elseif strcmp(method, 'global')
+            elseif strcmp(method_sort, 'global')
                 as_aux = global_assort_measure(dists, population_aux);
             end
             
