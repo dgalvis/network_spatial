@@ -23,7 +23,7 @@ function out = run_swap_netgen_config()
                              % false - only go out.direction
     
     
-    out.netgen_method = 'BA'; % 'WS' - watts_strogatz
+    out.netgen_method = 'WS'; % 'WS' - watts_strogatz
                               % 'BA' - barabasi_albert
                               
     out.num_nodes = 1000; % number of nodes for general network
@@ -31,10 +31,10 @@ function out = run_swap_netgen_config()
     out.rewiring_p = 0.2; % for 'WS' only, ignored for 'BA'
         
     
-    out.seed = 1;            % random number generator seed
-    out.seed_netgen = 1;     % random number for network generation
+    out.seed = 2;            % random number generator seed
+    out.seed_netgen = 2;     % random number for network generation
 
-    out.method_sort = 'global'; % global or local sortedness
+    out.method_sort = 'local'; % global or local sortedness
     out.method_swap = 'local'; % global or local swapping
     
     % heat based method
@@ -43,7 +43,7 @@ function out = run_swap_netgen_config()
     out.heat_info.temp = 0.001; % temperature
     out.heat_info.max_iterations = 10000; % total number of iterations including the heat ones
                     
-    out.name = 'forward_gloloc_2';   % directory will be called:
+    out.name = 'forward_WS_locloc_1';   % directory will be called:
                                 % results_assort_{out.name}
     
 end

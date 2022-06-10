@@ -1,10 +1,10 @@
 clear;clc;restoredefaultpath;close all;
 addpath('functions');
-addpath('results_assort_forward_testheat6');
+addpath('results_assort_forward_testheat7');
 load('swap_1.mat');
 
 % 1 and 2 global, alpha = 1
-test_id = 1;
+test_id = 8;
 
 assort = assort{test_id};
 pops = logical(pops{test_id});
@@ -18,7 +18,7 @@ figure();hold all;
 
 
 x = find(assort == max(assort));
-for i = x;%1:10:length(assort)
+for i = 1:length(assort)
     clf;hold all; 
     p1 = pops(:,i);
     p2 = ~p1;
@@ -27,7 +27,7 @@ for i = x;%1:10:length(assort)
     subplot(211);hold all;
     scatter3(p1_locs(:,1),p1_locs(:,2),p1_locs(:,3),200,'b', 'filled');
     scatter3(p2_locs(:,1),p2_locs(:,2),p2_locs(:,3),'k', 'filled');
-    view([-20,45]);
+    view([40 + i,40]);
     subplot(212);hold all;
     title('sortedness');
     plot(1:length(assort), assort, 'color', [0.5, 0.5, 0.5], 'linewidth', 1)
@@ -37,7 +37,7 @@ end
 %%
 clear;clc;restoredefaultpath;close all;
 addpath('functions');
-addpath('results_assort_netgen_forward_gloloc_1');
+addpath('results_assort_netgen_forward_WS_locloc_1');
 load('swap_1.mat');
 
 
@@ -45,7 +45,7 @@ assort = assort{1};
 pops = pops{1};
 connections = config.net_conns;
 figure();
-for i = 1:10:length(assort)
+for i = length(assort)
     clf;
     p = logical(pops(:,i));
     G = graph(config.net_conns(p,p));
