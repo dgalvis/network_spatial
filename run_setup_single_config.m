@@ -60,6 +60,13 @@ function out = run_setup_single_config(name, seed, seed2)
     
     out.method_sort = 'local'; % global or local sortedness
     out.method_swap = 'local'; % global or local swapping
+    
+    % heat based method
+    out.heat_info.heat_based = false; %active or not? if false, the others heat parameters don't matter
+    out.heat_info.heat_count_max = 20;% how many times can I kick out of a local min or max
+    out.heat_info.temp = 0.001; % temperature
+    out.heat_info.max_iterations = 10000; % total number of iterations including the heat ones
+    
     out.alpha  = 1; %[0,1] - 0 - swap pairs random
                     %        1 - swap pairs depend on radius
                     %        (0,1) - in between

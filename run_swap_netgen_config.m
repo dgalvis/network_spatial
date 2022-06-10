@@ -36,6 +36,12 @@ function out = run_swap_netgen_config()
 
     out.method_sort = 'global'; % global or local sortedness
     out.method_swap = 'local'; % global or local swapping
+    
+    % heat based method
+    out.heat_info.heat_based = false; %active or not? if false, the others heat parameters don't matter
+    out.heat_info.heat_count_max = 20;% how many times can I kick out of a local min or max
+    out.heat_info.temp = 0.001; % temperature
+    out.heat_info.max_iterations = 10000; % total number of iterations including the heat ones
                     
     out.name = 'forward_gloloc_2';   % directory will be called:
                                 % results_assort_{out.name}

@@ -46,7 +46,7 @@ sbatch run_model_hypercube.sh 8201:8400 $1
 sbatch run_model_hypercube.sh 8401:8600 $1
 sbatch run_model_hypercube.sh 8601:8800 $1
 sbatch run_model_hypercube.sh 8801:9000 $1
-sbatch run_model_hypercube.sh 8001:9200 $1
+sbatch run_model_hypercube.sh 9001:9200 $1
 sbatch run_model_hypercube.sh 9201:9400 $1
 sbatch run_model_hypercube.sh 9401:9600 $1
 sbatch run_model_hypercube.sh 9601:9800 $1

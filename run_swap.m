@@ -55,7 +55,6 @@ function [assort, pops] = run_swap(mypars, name)
     pops = cell(config.num_attempts, ...
                 length(config.pop_frac)); % this holds the locations of the populations
                                           % 1 - pop1, 0 - pop2
-
     
     ct = 1;
     for j = 1:config.num_attempts % iterate over number of attempts
@@ -69,7 +68,7 @@ function [assort, pops] = run_swap(mypars, name)
                         swapping_algorithm(net.conns, ...
                                            net.index(:,2:end), ...
                                            [config.pop_frac(k), config.iterations, 1, 0, 0, 0], ...
-                                           config.direction, config.method_sort, config.method_swap, config.alpha);
+                                           config.direction, config.method_sort, config.method_swap, config.heat_info, config.alpha);
                     
                     % Maybe run algorithm in direction ~config.direction
                     if config.both           
@@ -77,16 +76,16 @@ function [assort, pops] = run_swap(mypars, name)
                          swapping_algorithm(net.conns, ...
                                             net.index(:,2:end), ...
                                             [config.pop_frac(k), config.iterations, 1, 0, 0, 0], ...
-                                            ~config.direction, config.method_sort, config.method_swap, config.alpha, pop_aux(:,end)); 
+                                            ~config.direction, config.method_sort, config.method_swap, config.heat_info, config.alpha, pop_aux(:,end)); 
                     else
                         pop_aux_b = [];
                         assort_aux_b = [];
+                        
                     end
                     
                     % populate the full array
                     pops{j, k} = [pop_aux, pop_aux_b];
                     assort{j, k} =  [assort_aux, assort_aux_b];
-                    
             end
             ct = ct + 1;
         end

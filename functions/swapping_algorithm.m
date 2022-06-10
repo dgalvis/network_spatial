@@ -28,6 +28,15 @@
 %                  : global - global sortedness
 % method_swap      : local - local swapping
 %                  : global - global swapping
+% heat_info
+%        heat_based: boolean, if 1 use heat based method
+%        heat_count_max: integer, the number of times the heat method can be
+%                       activated to get out of a local maximum (minimum)
+%                       sortedness
+%        temp: double, the temperature for the method
+%        max_iterations: maximum number of iterations, including those that
+%                        are heat based swaps which move in the wrong
+%                        sortedness direction
 % alpha       : [0,1] - 0 - swap pairs random
 %                       1 - swap pairs depend on radius
 %                       (0,1) - in between           
@@ -48,30 +57,21 @@
 %     This gives the full assortativity value for each swap iteration
 %     Either the length is pars(2) or the maximum number before the swapper
 %       gives up
-%
-%
+% heat_all       : if heat_based swapping is on, then heat_all is a boolean
+%                   array. It takes the value 1 for any iteration where the
+%                   sortedness is maximum (minimum) if direction is true
+%                   (false) across all previous iterations
 %=========================================================================%
 
-function [out, vals, assort_all] = swapping_algorithm(connections, locations, pars, direction, method_sort, method_swap, alpha, population)
+function [out, vals, assort_all] = swapping_algorithm(connections, locations, pars, direction, method_sort, method_swap, heat_info, alpha, population)
 
 
     % Define important parameters
     num_nodes = length(connections);
     frac_pop = pars(1);
     iterations = pars(2);
-    
-    
-    if nargin < 5
-        method_sort = 'local';
-    end
-    if nargin < 6
-        method_swap = 'global';
-    end
-    if nargin < 7
-        alpha = 1; % 1 - total dependence on shell
-                   % 0 - completely random
-    end    
-    if nargin < 8
+      
+    if nargin < 9
         % How many nodes in population 1?
         num_pop = round(num_nodes * frac_pop);
 
@@ -85,8 +85,8 @@ function [out, vals, assort_all] = swapping_algorithm(connections, locations, pa
     end
      
     % Run the swapper
-    [vals, assort_all] = swapper(iterations,  population, connections, locations, direction, method_sort, method_swap, alpha);
-   
+    [vals, assort_all, heat_all] = swapper(iterations,  population, connections, locations, direction, method_sort, method_swap, heat_info, alpha);
+
     % Assign values to population 1 and 2
     population1_vals = lognormals(pars(3), pars(5), [sum(vals(:,1)), 1]);
     population2_vals = lognormals(pars(4), pars(6), [sum(~vals(:,1)), 1]);
@@ -126,5 +126,8 @@ function [out, vals, assort_all] = swapping_algorithm(connections, locations, pa
     end
     vals = logical(vals);
     
+    out = out(:, ~heat_all);
+    vals = vals(:, ~heat_all);
+    assort_all = assort_all(:, ~heat_all);
     
 end
