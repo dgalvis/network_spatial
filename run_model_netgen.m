@@ -23,6 +23,7 @@
 function run_model_netgen(mypars, name, keep_traj)
 
     addpath('functions');
+    addpath('functions_netgen');
     
     if nargin < 3
         keep_traj = false;
