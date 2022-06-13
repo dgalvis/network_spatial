@@ -48,6 +48,24 @@ function run_model_netgen(mypars, name, keep_traj)
         elseif strcmp(config.model, 'fn')
             net = class_fn;
         end
+           
+        conn_check = false;
+        while ~conn_check
+            if strcmp(config.netgen_method, 'WS')
+                net_conns = watts_strogatz(config.num_nodes, config.num_conns / 2, config.rewiring_p);
+            elseif strcmp(config.netgen_method, 'BA')
+                seed_net = watts_strogatz(config.num_conns + 1, config.num_conns / 2, 0);
+                net_conns = barabasi_albert(config.num_nodes, config.num_conns / 2, seed_net);
+                config.net_init = seed_net;
+            end
+            config.net_conns = net_conns;
+            
+            if max(conncomp(graph(net_conns))) == 1
+                conn_check = true;
+            end
+            
+        end
+
         net.make_network(config.net_conns * config.pars(i, 2));
         
         

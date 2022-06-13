@@ -84,24 +84,24 @@ function pars = run_setup_netgen(name, seed, seed_swap, seed_netgen)
      
      
      % network generation
-     rng(seed_netgen);
+%     rng(seed_netgen);
      
-    conn_check = false;
-    while ~conn_check 
-         if strcmp(config.netgen_method, 'WS')
-             net = watts_strogatz(config.num_nodes, config.num_conns / 2, config.rewiring_p);
-         elseif strcmp(config.netgen_method, 'BA')
-             seed_net = watts_strogatz(config.num_conns + 1, config.num_conns / 2, 0);
-             net = barabasi_albert(config.num_nodes, config.num_conns / 2, seed_net);
-             config.net_init = seed_net;
-         end
-         config.net_conns = net;
-         
-         if max(conncomp(graph(net))) == 1
-             conn_check = true;
-         end
-         
-    end
+%     conn_check = false;
+%     while ~conn_check 
+%          if strcmp(config.netgen_method, 'WS')
+%              net = watts_strogatz(config.num_nodes, config.num_conns / 2, config.rewiring_p);
+%          elseif strcmp(config.netgen_method, 'BA')
+%              seed_net = watts_strogatz(config.num_conns + 1, config.num_conns / 2, 0);
+%              net = barabasi_albert(config.num_nodes, config.num_conns / 2, seed_net);
+%              config.net_init = seed_net;
+%          end
+%          config.net_conns = net;
+%          
+%          if max(conncomp(graph(net))) == 1
+%              conn_check = true;
+%          end
+%          
+%     end
      
      % save
      fout = fullfile(dout, 'cube.mat');
