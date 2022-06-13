@@ -2,7 +2,7 @@
 load(fullfile('results_hypercube_attempt_06', 'out_concat.mat'))
 X = assort_concat;
 Y = G_concat;%gconn_concat;
-Z = pks_concat;
+Z = ord_concat;
 
 
 %what does this look like?
