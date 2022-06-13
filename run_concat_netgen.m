@@ -43,12 +43,12 @@ function run_concat_netgen(name)
         assort_concat(i) = assort;
         G_concat(i)      = pvals(1);
         gconn_concat(i)      = pvals(2);
-        pks_concat(i)    = mean(sum(net.sys.pk_locs));
-        pks_p1_concat(i)    = mean(sum(net.sys.pk_locs(:, logical(net.sys.pops))));
-        pks_p2_concat(i)    = mean(sum(net.sys.pk_locs(:, ~logical(net.sys.pops))));
-        ord_concat(i)    = net.sys.ord;
-        ord_p1_concat(i)    = net.sys.ord_pops(2);
-        ord_p2_concat(i)    = net.sys.ord_pops(1);
+        pks_concat(i)    = mean(sum(net.pk_locs));
+        pks_p1_concat(i)    = mean(sum(net.pk_locs(:, logical(net.pops))));
+        pks_p2_concat(i)    = mean(sum(net.pk_locs(:, ~logical(net.pops))));
+        ord_concat(i)    = net.ord;
+        ord_p1_concat(i)    = net.ord_pops(2);
+        ord_p2_concat(i)    = net.ord_pops(1);
     end
     clear i  net pvals assort config;
     save(fullfile(dout,'out_concat'));
