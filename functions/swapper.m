@@ -74,6 +74,9 @@ function [population_all, assort_all, heat_all] = swapper(iterations, population
     end
     if isempty(locations)
         alpha = 0;
+        debias = false;
+    else
+        debias = true;
     end
     
     
@@ -99,7 +102,7 @@ function [population_all, assort_all, heat_all] = swapper(iterations, population
     % Find full assortativity, this is always returned by assort_all
     if strcmp(method_sort, 'local')
         [pop1, pop2] = find_pops(connections, population);
-        assort_all(1) =  assort_measure(pop1, pop2, connections, population); 
+        assort_all(1) =  assort_measure(pop1, pop2, connections, population, debias); 
     elseif strcmp(method_sort, 'global')
         assort_all(1) = global_assort_measure(dists, population);
     end
@@ -180,7 +183,7 @@ function [population_all, assort_all, heat_all] = swapper(iterations, population
             % and the number of connections for pop2 onto pop2
             [pop1, pop2] = find_pops(connections, population);
             % use that to calculate full assortativity for both
-            [as,~,~] =  assort_measure(pop1, pop2, connections, population);
+            [as,~,~] =  assort_measure(pop1, pop2, connections, population, debias);
         elseif strcmp(method_sort, 'global')
             as = global_assort_measure(dists, population);
         end
@@ -206,7 +209,7 @@ function [population_all, assort_all, heat_all] = swapper(iterations, population
             if strcmp(method_sort, 'local')
                 % and in the swapped version
                 [pop1_aux, pop2_aux] = find_pops(connections, population_aux);
-                [as_aux,~,~] = assort_measure(pop1_aux, pop2_aux, connections, population_aux);    
+                [as_aux,~,~] = assort_measure(pop1_aux, pop2_aux, connections, population_aux, debias);    
             elseif strcmp(method_sort, 'global')
                 as_aux = global_assort_measure(dists, population_aux);
             end

@@ -12,7 +12,7 @@ function out = run_swap_netgen_config()
 
     out.pop_frac = 0.1;      % numbers in [0,1]
                              % can be a 1-D array 
-    out.num_attempts = 1; % number of attempts networks to run
+    out.num_attempts = 5; % number of attempts networks to run
     out.iterations = 10000;  % max iterations of swapping algorithm
                                % (in practice convergence is faster)
     
@@ -31,11 +31,11 @@ function out = run_swap_netgen_config()
     out.rewiring_p = 0.2; % for 'WS' only, ignored for 'BA'
         
     
-    out.seed = 2;            % random number generator seed
-    out.seed_netgen = 2;     % random number for network generation
+    out.seed = 3;            % random number generator seed
+    out.seed_netgen = 4;     % random number for network generation
 
     out.method_sort = 'local'; % global or local sortedness
-    out.method_swap = 'local'; % global or local swapping
+    out.method_swap = 'global'; % global or local swapping
     
     % heat based method
     out.heat_info.heat_based = false; %active or not? if false, the others heat parameters don't matter
@@ -43,7 +43,7 @@ function out = run_swap_netgen_config()
     out.heat_info.temp = 0.001; % temperature
     out.heat_info.max_iterations = 10000; % total number of iterations including the heat ones
                     
-    out.name = 'forward_WS_locloc_1';   % directory will be called:
+    out.name = 'forward_WS_locglo_2';   % directory will be called:
                                 % results_assort_{out.name}
     
 end

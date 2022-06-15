@@ -35,14 +35,14 @@ for i = 1:length(assort)
     pause(0.1);
 end
 %%
-clear;clc;restoredefaultpath;close all;
+clear;clc;restoredefaultpath;%close all;
 addpath('functions');
-addpath('results_assort_netgen_forward_WS_locloc_1');
+addpath('results_assort_netgen_forward_WS_locglo_2');
 load('swap_1.mat');
 
-
-assort = assort{1};
-pops = pops{1};
+test_id = 3;
+assort = assort{test_id};
+pops = pops{test_id};
 connections = config.net_conns;
 figure();
 for i = length(assort)

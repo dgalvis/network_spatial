@@ -46,7 +46,7 @@ function out = run_setup_netgen_config(name, seed, seed_swap, seed_netgen)
     
     
     out.poprng   = [0.1, 0.1]; % pop1 frac range
-    out.itrng    = [0, 250]; % swapper iteration range
+    out.itrng    = [0, 350]; % swapper iteration range
     
     out.gl1meanrng = [2, 2];
     out.gl2meanrng = [1, 1];
@@ -70,7 +70,7 @@ function out = run_setup_netgen_config(name, seed, seed_swap, seed_netgen)
     out.rewiring_p = 0.2; % for 'WS' only, ignored for 'BA'
     
     out.method_sort = 'local'; % global or local sortedness
-    out.method_swap = 'local'; % global or local swapping
+    out.method_swap = 'global'; % global or local swapping
     
     % heat based method
     out.heat_info.heat_based = false; %active or not? if false, the others heat parameters don't matter
