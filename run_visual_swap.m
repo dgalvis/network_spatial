@@ -37,7 +37,7 @@ end
 %%
 clear;clc;restoredefaultpath;%close all;
 addpath('functions');
-addpath('results_assort_netgen_forward_WS_locglo_2');
+addpath('results_assort_netgen_forward_WS_locglo_3');
 load('swap_1.mat');
 
 test_id = 3;
