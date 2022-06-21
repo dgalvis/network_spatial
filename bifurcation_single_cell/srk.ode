@@ -1,0 +1,34 @@
+# ODEs
+dv/dt=(-gk*n*(v-vk)-ica(v)-gkca*hill(ca)*(v-vk)-(1-g)*gl*(v-vk))/cm
+dn/dt=lambda*(ninf(v)-n)/taun(v)
+dca/dt=f*(-alpha*ica(v)-kca*ca)
+
+# Initial Conditions
+v(0)=-61.062
+n(0)=0.00027
+ca(0)=0.34
+
+# Parameters
+param gl=60.0,g=0.0
+param cm=5310.0
+param vm=4.0,sm=14.0,vn=-15.0,sn=5.6
+param a=65.0,b=20.0,c=60.0
+param vbar=-75.0,vh=-10.0,sh=10.0
+param gk=2500.0,gca=1400.0,gkca=30000.0
+param vk=-75.0,vca=110.0
+param lambda=1.6,kd=100.0,f=0.001,kca=0.03
+param alpha=0.0000045061
+
+# Functions
+hill(ca)=ca/(ca+kd)
+minf(v)=1/(1+exp((vm-v)/sm))
+hinf(v)=1/(1+exp((v-vh)/sh))
+ninf(v)=1/(1+exp((vn-v)/sn))
+taun(v)=(c/(exp((v-vbar)/a)+exp(-(v-vbar)/b)))
+ica(v)=gca*minf(v)*hinf(v)*(v-vca)
+
+# Other Stuff
+@ dt=.01, total=10000, xplot=t,yplot=v
+@ xmin=0, xmax=200, ymin=-80, ymax=0
+@ xlo=0,ylo=-80,xhi=10000,yhi=-10
+done

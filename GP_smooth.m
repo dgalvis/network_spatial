@@ -1,5 +1,5 @@
 %load data
-load(fullfile('results_netgen_attempt_03', 'out_concat.mat'))
+load(fullfile('results_hypercube_attempt_06', 'out_concat.mat'))
 X = assort_concat;
 Y = G_concat;%gconn_concat;
 Z = pks_concat;
@@ -33,6 +33,13 @@ shading('flat')
 xlim([min(X(:)), max(X(:))]);
 ylim([min(Y(:)), max(Y(:))]);
 grid;colorbar;caxis([0,max(Zpred(:))]);
+
+figure()
+pcolor(X_pred,Y_pred, reshape(Zsd,size(X_pred)))
+shading('flat')
+xlim([min(X(:)), max(X(:))]);
+ylim([min(Y(:)), max(Y(:))]);
+grid;colorbar;caxis([0,max(Zsd(:))]);
 
 %do upper bound (This is an upper bound for what the plot is)
 % figure()
