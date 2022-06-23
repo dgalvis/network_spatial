@@ -1,10 +1,16 @@
 %load data
-load(fullfile('results_hypercube_attempt_06', 'out_concat.mat'))
+load(fullfile('results_directory','results_hypercube_attempt_04', 'out_concat.mat'));
 X = assort_concat;
-Y = G_concat;%gconn_concat;
+%Y = gconn_concat;
+Y = G_concat;
 Z = pks_concat;
 
+%X = X(1:5000);
+%Y = Y(1:5000);
+%Z = Z(1:5000);
 
+figure();
+scatter3(X(:), Y(:), Z(:));
 %what does this look like?
 % figure(1)
 % pcolor(X,Y, Z)

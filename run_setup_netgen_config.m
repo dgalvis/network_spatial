@@ -39,21 +39,21 @@
 
 function out = run_setup_netgen_config(name, seed, seed_swap, seed_netgen)
 
-    out.model = 'fn'; % 'fn' or 'srk'
+    out.model = 'srk'; % 'fn' or 'srk'
     out.num_pars = 10000;
-    out.Gfracrng = [0.1, 0.4];
-    out.gconnrng = [0.1, 0.1];
+    out.Gfracrng = [0.45, 0.45];
+    out.gconnrng = [0, 10];
     
     
     out.poprng   = [0.1, 0.1]; % pop1 frac range
     out.itrng    = [0, 350]; % swapper iteration range
     
-    out.gl1meanrng = [2, 2];
-    out.gl2meanrng = [1, 1];
+    out.gl1meanrng = [60, 60];
+    out.gl2meanrng = [100, 100];
     out.gl1stdrng = [0, 0];
     out.gl2stdrng = [0, 0];
     
-    out.Tmax = 6000;
+    out.Tmax = 500000;
     out.seed = seed; % seed for hypercube
     out.seed_swap = seed_swap; % seed for run_hypercube.m
     out.seed_netgen = seed_netgen; % seed for random network generator
@@ -67,7 +67,7 @@ function out = run_setup_netgen_config(name, seed, seed_swap, seed_netgen)
                               
     out.num_nodes = 1000; % number of nodes for general network
     out.num_conns = 12; % average degree of general network
-    out.rewiring_p = 0.1; % for 'WS' only, ignored for 'BA'
+    out.rewiring_p = 0.2; % for 'WS' only, ignored for 'BA'
     
     out.method_sort = 'local'; % global or local sortedness
     out.method_swap = 'global'; % global or local swapping

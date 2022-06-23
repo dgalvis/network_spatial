@@ -1,16 +1,19 @@
 # ODEs
-dv/dt=v-v^3-w+g*i
-dw/dt=0.08*(v+0.7-0.8*w)
+a=0.7
+b=0.8
+tau=12.5
+dV/dt=V-V^3/3-W+I*G
+dW/dt=(V+a-b*W)/tau
 
 # Initial Conditions
-v(0)=-0.827
-w(0)=-0.16
+V(0)=-1.199408
+W(0)=-0.62426
 
 # Parameters
-param i=0.1,g=1
+param I=0,G=1
 
 # Other Stuff
-@ dt=.01, total=10000, xplot=t,yplot=v
-@ xmin=0, xmax=5, ymin=-3, ymax=3
-@ xlo=0,ylo=-1,xhi=10000,yhi=0
+@ dt=.005,total=10000,xplot=t,yplot=V
+@ xmin=0, xmax=2, ymin=-3, ymax=3
+@ xlo=0,ylo=-2,xhi=10000,yhi=2,maxstor=500000
 done

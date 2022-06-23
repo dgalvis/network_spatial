@@ -40,9 +40,9 @@
 function out = run_setup_hypercube_config(name, seed, seed_swap)
 
     out.model = 'srk'; % 'fn' or 'srk'
-    out.num_pars = 10000;
-    out.Gfracrng = [0.35, 0.35];
-    out.gconnrng = [1,10];
+    out.num_pars = 2500;
+    out.Gfracrng = [0.45, 0.45];
+    out.gconnrng = [0, 10];
     
     
     out.poprng   = [0.1, 0.1]; % pop1 frac range
@@ -61,7 +61,7 @@ function out = run_setup_hypercube_config(name, seed, seed_swap)
     
     out.ric_scale = 6; % recommend [3, Inf] (yes you can use Inf)
     out.method_sort = 'local'; % global or local sortedness
-    out.method_swap = 'local'; % global or local swapping
+    out.method_swap = 'global'; % global or local swapping
     
     % heat based method
     out.heat_info.heat_based = false; %active or not? if false, the others heat parameters don't matter
