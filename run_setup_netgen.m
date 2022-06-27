@@ -14,15 +14,14 @@
 % seed     = seed for random number generator of hypercube
 % name     = folder name for this run
 % seed_swap = seed for run_model_hypercube.m (swapping and IC)
-% seed_netgen = seed for network generation
 %=========================================================================%
 
-function pars = run_setup_netgen(name, seed, seed_swap, seed_netgen)
+function pars = run_setup_netgen(name, seed, seed_swap)
     addpath('functions');
     addpath('functions_netgen');
     
     % Load in the ranges
-    config = run_setup_netgen_config(name, seed, seed_swap, seed_netgen);
+    config = run_setup_netgen_config(name, seed, seed_swap);
     
     
     rng(config.seed);
@@ -81,27 +80,7 @@ function pars = run_setup_netgen(name, seed, seed_swap, seed_netgen)
      
      % add to the config with all information
      config.pars = pars;
-     
-     
-     % network generation
-%     rng(seed_netgen);
-     
-%     conn_check = false;
-%     while ~conn_check 
-%          if strcmp(config.netgen_method, 'WS')
-%              net = watts_strogatz(config.num_nodes, config.num_conns / 2, config.rewiring_p);
-%          elseif strcmp(config.netgen_method, 'BA')
-%              seed_net = watts_strogatz(config.num_conns + 1, config.num_conns / 2, 0);
-%              net = barabasi_albert(config.num_nodes, config.num_conns / 2, seed_net);
-%              config.net_init = seed_net;
-%          end
-%          config.net_conns = net;
-%          
-%          if max(conncomp(graph(net))) == 1
-%              conn_check = true;
-%          end
-%          
-%     end
+
      
      % save
      fout = fullfile(dout, 'cube.mat');

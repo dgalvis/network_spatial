@@ -1,10 +1,9 @@
 clear;clc;restoredefaultpath;close all;
 addpath('functions');
-addpath('results_assort_forward_testheat7');
-load('swap_1.mat');
+load(fullfile('results_directory', 'results_assort_forward_testheat7', 'swap_1.mat'));
 
 % 1 and 2 global, alpha = 1
-test_id = 8;
+test_id = 6;
 
 assort = assort{test_id};
 pops = logical(pops{test_id});
@@ -37,8 +36,7 @@ end
 %%
 clear;clc;restoredefaultpath;%close all;
 addpath('functions');
-addpath('results_assort_netgen_forward_WS_locglo_3');
-load('swap_1.mat');
+load(fullfile('results_directory', 'results_assort_netgen_forward_WS_locglo_3', 'swap_1.mat'));
 
 test_id = 3;
 assort = assort{test_id};

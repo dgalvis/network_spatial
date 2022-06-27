@@ -1,5 +1,5 @@
 clear;clc;close all;restoredefaultpath;
-addpath('functions');
+addpath('../functions');
 
 
 

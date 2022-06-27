@@ -20,7 +20,7 @@ function run_concat_netgen(name)
 
 
     addpath('functions');
-    config = run_setup_hypercube_config(name, 0, 0);
+    config = run_setup_netgen_config(name, 0, 0);
     dout = ['results_netgen_', config.name];
     clear config;
     

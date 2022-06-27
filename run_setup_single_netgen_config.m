@@ -1,5 +1,5 @@
 %=========================================================================%
-% Function: run_setup_single_config
+% Function: run_setup_single_netgen_config
 % Author: Daniel Galvis
 %
 % 05/03/2021
@@ -23,21 +23,18 @@
 % seed     = seed for swapping algorithm
 % seed2    = seed for ICs
 
-% radius   = radius of the islet
 % name     = folder name for this run
 %
 % method_sort      : local - local sortedness
 %                  : global - global sortedness
 % method_swap      : local - local swapping
 %                  : global - global swapping
-% alpha       : [0,1] - 0 - swap pairs random
-%                       1 - swap pairs depend on radius
-%                       (0,1) - in between   
+ 
 %
 % num_pars = number of parameters to running over
 % inc      = run swap iterations 1:inc:end
 %=========================================================================%
-function out = run_setup_single_config(name, seed, seed2)
+function out = run_setup_single_netgen_config(name, seed, seed2)
 
     out.model = 'fn'; % 'fn' or 'srk'
     out.Tmax = 6000; % max time points
@@ -55,7 +52,6 @@ function out = run_setup_single_config(name, seed, seed2)
     out.seed = seed; % seed for swapping algorithm
     out.seed2 = seed2; % seed for random initial conditions
     
-    out.radius = 5.55;
     out.name = ['attempt_', name];
     
     out.method_sort = 'local'; % global or local sortedness
@@ -67,9 +63,12 @@ function out = run_setup_single_config(name, seed, seed2)
     out.heat_info.temp = 0.001; % temperature
     out.heat_info.max_iterations = 10000; % total number of iterations including the heat ones
     
-    out.alpha  = 1; %[0,1] - 0 - swap pairs random
-                    %        1 - swap pairs depend on radius
-                    %        (0,1) - in between
+    out.netgen_method = 'WS'; % 'WS' - watts_strogatz
+                              % 'BA' - barabasi_albert
+                              
+    out.num_nodes = 1000; % number of nodes for general network
+    out.num_conns = 12; % average degree of general network
+    out.rewiring_p = 0.2; % for 'WS' only, ignored for 'BA'
 
     out.num_pars = 20;
     out.pars = zeros(out.num_pars, 8);
@@ -82,7 +81,7 @@ function out = run_setup_single_config(name, seed, seed2)
     
     out.pars(:,2) = 0.1; % gconn (connectivity)
                           % 1, 2, 10 srk
-                          % 0.01, 0.05, 0.1 fn
+                          % 0.01, 0.02, 0.1 fn
     
     % Always the same value!
     out.pars(:,3) = 0.1; % population 1 fraction

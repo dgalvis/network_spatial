@@ -1,0 +1,58 @@
+%=========================================================================%
+% Function: run_concat_single_netgen
+% Author: Daniel Galvis
+%
+% 05/03/2021
+% code generation
+%
+% Concatenate the peaks and order parameter results for run_model_single.m
+% Greatly reduces the size of results for removing from HPC (since no
+% rasters are included here).
+% 
+% Note: run_model_single.m must be run first!!!
+%
+% Parameters
+% ==========
+% name   : directory name
+%============================
+
+function run_concat_single_netgen(name)
+
+
+    addpath('functions');
+    config = run_setup_single_netgen_config(name, 0, 0);
+    dout = ['results_single_netgen_', config.name];
+    clear config;
+    
+    
+    
+    load(fullfile(dout,'parameters.mat'), 'config', 'assort_all');
+    
+    assort_concat = zeros(length(assort_all), config.num_pars);
+    G_concat = zeros(length(assort_all), config.num_pars);
+    gconn_concat = zeros(length(assort_all), config.num_pars);
+    pks_concat = zeros(length(assort_all), config.num_pars);
+    pks_p1_concat = zeros(length(assort_all), config.num_pars);
+    pks_p2_concat = zeros(length(assort_all), config.num_pars);
+    ord_concat = zeros(length(assort_all), config.num_pars);
+    ord_p1_concat = zeros(length(assort_all), config.num_pars);
+    ord_p2_concat = zeros(length(assort_all), config.num_pars);
+    for i = 1:config.inc:length(assort_all)
+        for j = 1:config.num_pars
+            load(fullfile(dout, ['out_', num2str(i), '_', num2str(j),  '.mat']), 'net', 'pvals', 'assort');
+            
+            assort_concat(i,j) = assort;
+            G_concat(i,j)      = pvals(1);
+            gconn_concat(i,j)  = pvals(2);
+            pks_concat(i,j)    = mean(sum(net.pk_locs));
+            pks_p1_concat(i,j)    = mean(sum(net.pk_locs(:, logical(net.pops))));
+            pks_p2_concat(i,j)    = mean(sum(net.pk_locs(:, ~logical(net.pops))));
+            ord_concat(i,j)    = net.ord;
+            ord_p1_concat(i,j)    = net.ord_pops(2);
+            ord_p2_concat(i,j)    = net.ord_pops(1);
+        end
+    end
+    clear i j net pvals assort config assort_all;
+    save(fullfile(dout,'out_concat'));
+
+end

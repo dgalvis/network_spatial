@@ -30,7 +30,7 @@ function run_model_netgen(mypars, name, keep_traj)
     end
     
     % Load in the ranges
-    config = run_setup_netgen_config(name, 0, 0, 0);
+    config = run_setup_netgen_config(name, 0, 0);
     dout = ['results_netgen_', config.name];
     clear config;
     

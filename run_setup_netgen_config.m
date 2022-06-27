@@ -34,29 +34,27 @@
 % direction - assort (true), disassort (false)
 % meth_full - full assort (true), node assort (false)
 % seed_swap - seed for run_model_hypercube (swapping and IC)
-% seed_netgen - seed for network generation
 %=========================================================================%
 
-function out = run_setup_netgen_config(name, seed, seed_swap, seed_netgen)
+function out = run_setup_netgen_config(name, seed, seed_swap)
 
-    out.model = 'srk'; % 'fn' or 'srk'
+    out.model = 'fn'; % 'fn' or 'srk'
     out.num_pars = 10000;
-    out.Gfracrng = [0.45, 0.45];
-    out.gconnrng = [0, 10];
+    out.Gfracrng = [0.15, 0.345];
+    out.gconnrng = [0.02, 0.02];
     
     
     out.poprng   = [0.1, 0.1]; % pop1 frac range
     out.itrng    = [0, 350]; % swapper iteration range
     
-    out.gl1meanrng = [60, 60];
-    out.gl2meanrng = [100, 100];
+    out.gl1meanrng = [2, 2];
+    out.gl2meanrng = [1, 1];
     out.gl1stdrng = [0, 0];
     out.gl2stdrng = [0, 0];
     
-    out.Tmax = 500000;
+    out.Tmax = 6000;
     out.seed = seed; % seed for hypercube
     out.seed_swap = seed_swap; % seed for run_hypercube.m
-    out.seed_netgen = seed_netgen; % seed for random network generator
     
     out.direction = true; % forward - assort, backward - disassort
     

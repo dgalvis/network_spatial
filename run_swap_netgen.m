@@ -45,25 +45,6 @@ function [assort, pops] = run_swap_netgen(mypars, name)
                    length(config.pop_frac)]); % use master seed to create
                                                 % an individual seed
                                                 % for each network
-                                                                                
-    rng(config.seed_netgen);  
-    conn_check = false;
-    while ~conn_check 
-         if strcmp(config.netgen_method, 'WS')
-             net = watts_strogatz(config.num_nodes, config.num_conns / 2, config.rewiring_p);
-         elseif strcmp(config.netgen_method, 'BA')
-             seed_net = watts_strogatz(config.num_conns + 1, config.num_conns / 2, 0);
-             net = barabasi_albert(config.num_nodes, config.num_conns / 2, seed_net);
-             config.net_init = seed_net;
-         end
-         config.net_conns = net;
-         
-         if max(conncomp(graph(net))) == 1
-             conn_check = true;
-         end
-         
-    end             % initialise the network 
-    
 
     assort = cell(config.num_attempts, ...
                   length(config.pop_frac)); % this holds assortativity values
@@ -71,13 +52,34 @@ function [assort, pops] = run_swap_netgen(mypars, name)
     pops = cell(config.num_attempts, ...
                 length(config.pop_frac)); % this holds the locations of the populations
                                           % 1 - pop1, 0 - pop2
-
+    conns = cell(config.num_attempts, ...
+                  length(config.pop_frac)); % this holds assortativity values
     
     ct = 1;
     for j = 1:config.num_attempts % iterate over number of attempts
         for k = 1:length(config.pop_frac) % iterate over all pop1 fractions
             if sum(ct == mypars) % only run a subset of the attempts
                     rng(seeds(j, k)); % individual run seed
+                    
+                    
+                    conn_check = false;
+                    while ~conn_check 
+                         if strcmp(config.netgen_method, 'WS')
+                             net = watts_strogatz(config.num_nodes, config.num_conns / 2, config.rewiring_p);
+                         elseif strcmp(config.netgen_method, 'BA')
+                             seed_net = watts_strogatz(config.num_conns + 1, config.num_conns / 2, 0);
+                             net = barabasi_albert(config.num_nodes, config.num_conns / 2, seed_net);
+                             %config.net_init = seed_net;
+                         end
+                         %config.net_conns = net;
+
+                         if max(conncomp(graph(net))) == 1
+                             conn_check = true;
+                         end
+
+                    end             % initialise the network 
+                    
+                    
                     
                     % Run the swapping algorithm in direction
                     % config.direction
@@ -102,6 +104,7 @@ function [assort, pops] = run_swap_netgen(mypars, name)
                     % populate the full array
                     pops{j, k} = [pop_aux, pop_aux_b];
                     assort{j, k} =  [assort_aux, assort_aux_b];
+                    conns{j, k} = net;
                     
             end
             ct = ct + 1;
@@ -110,5 +113,5 @@ function [assort, pops] = run_swap_netgen(mypars, name)
     
     % save results
     fout = fullfile(dout, ['swap_', name]);
-    save(fout, 'assort', 'pops', 'config');
+    save(fout, 'assort', 'pops', 'conns', 'config');
 end

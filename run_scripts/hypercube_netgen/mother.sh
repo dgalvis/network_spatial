@@ -1,4 +1,4 @@
-# sbatch run_setup_netgen.sh $1 1 1 1
+# sbatch run_setup_netgen.sh $1 1 1
 sbatch run_model_netgen.sh 1:200 $1
 sbatch run_model_netgen.sh 201:400 $1
 sbatch run_model_netgen.sh 401:600 $1

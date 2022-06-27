@@ -14,6 +14,5 @@ module load MATLAB/2019b
             
 BB_WORKDIR=$(mktemp -d /scratch/${USER}_${SLURM_JOBID}.XXXXXX)            
 export TMPDIR=${BB_WORKDIR}  
-
 cd ../..       
-matlab -nodisplay -r "run_setup_hypercube('$1',$2, $3);exit;" 
+matlab -nodisplay -r "run_concat_single_netgen('$1');exit;" 

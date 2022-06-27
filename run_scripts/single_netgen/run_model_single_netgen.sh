@@ -1,5 +1,5 @@
 #!/bin/bash            
-#SBATCH --time=10:00:00     # Walltime            
+#SBATCH --time=100:00:00     # Walltime            
 #SBATCH --mem=32G  # memory/cpu            
 #SBATCH --ntasks 16            
 #SBATCH --nodes 1-1            
@@ -14,6 +14,5 @@ module load MATLAB/2019b
             
 BB_WORKDIR=$(mktemp -d /scratch/${USER}_${SLURM_JOBID}.XXXXXX)            
 export TMPDIR=${BB_WORKDIR}  
-
-cd ../..       
-matlab -nodisplay -r "run_setup_hypercube('$1',$2, $3);exit;" 
+cd ../..          
+matlab -nodisplay -r "run_model_single_netgen($1, '$2');exit;" 

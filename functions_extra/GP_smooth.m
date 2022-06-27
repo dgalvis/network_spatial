@@ -20,7 +20,7 @@ scatter3(X(:), Y(:), Z(:));
  gprMdl1 = fitrgp([X(:) Y(:)],Z(:), "Standardize",1);
 
 %need some points we want to have the plot for
-[X_pred, Y_pred] = meshgrid(linspace(min(X(:)), max(X(:)),240), linspace(min(Y(:)), max(Y(:))), 240);
+[X_pred, Y_pred] = meshgrid(linspace(min(X(:)), max(X(:)),240), linspace(min(Y(:)), max(Y(:)), 240));
 
 %predict for these points
 [Zpred,Zsd, ~] = predict(gprMdl1,[X_pred(:), Y_pred(:)]);
