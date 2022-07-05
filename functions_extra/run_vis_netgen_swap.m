@@ -19,7 +19,7 @@ t = linspace(0, 2*pi, config.num_nodes+1);t = t(1:end-1);
 
 %%
 figure();
-for i =length(assort)
+for i =1:length(assort)
     clf;hold all;
     p = logical(pops(:, i));
     
