@@ -1,0 +1,7 @@
+run_preproc_hypercube('results_netgen_attempt_fn_G_high');
+run_preproc_hypercube('results_netgen_attempt_srk_G_high');
+run_preproc_hypercube('results_hypercube_attempt_fn_G_high');
+run_preproc_hypercube('results_hypercube_attempt_srk_G_high');
+
+run_preproc_hypercube('results_netgen_attempt_fn_G_high_beta_high');
+run_preproc_hypercube('results_netgen_attempt_fn_G_high_beta_low');
