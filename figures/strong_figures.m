@@ -114,6 +114,25 @@ set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
 saveas(gcf, fullfile(dout,'fn_netgen_traj_a.png'));
 
+figure('Renderer', 'painters', 'Position', [10, 10, 500, 300]);hold all;
+make_raster(fn_netgen_a.net.pk_t, fn_netgen_a.net.pk_locs, fn_netgen_a.net.pops);
+axis tight
+xlim([0,500]);
+xticks([0,500]);
+xticklabels([0,500]);
+
+
+c = (1-max([round(fn_netgen_a.assort,2),0]));
+set(gca, 'color', [1,c,c]);
+H = gca;
+H.LineWidth = 2;
+H.FontSize = 16;
+H.FontWeight = 'bold';
+box on;
+set(gcf, 'color', [1,1,1]);
+set(gcf, 'InvertHardCopy', 'off');
+saveas(gcf, fullfile(dout,'fn_netgen_traj_a_raster.png'));
+
 %% FN WS
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;
 X = fn_netgen_results.results.X_pred;
@@ -189,6 +208,27 @@ box on;
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
 saveas(gcf, fullfile(dout,'srk_netgen_traj_a.png'));
+
+figure('Renderer', 'painters', 'Position', [10, 10, 500, 300]);hold all;
+make_raster(srk_netgen_a.net.pk_t/60000, srk_netgen_a.net.pk_locs, srk_netgen_a.net.pops);
+axis tight
+xlim([0,5]);
+xticks([0,5]);
+xticklabels([0,5]);
+
+
+c = (1-max([round(srk_netgen_a.assort,2),0]));
+set(gca, 'color', [1,c,c]);
+H = gca;
+H.LineWidth = 2;
+H.FontSize = 16;
+H.FontWeight = 'bold';
+box on;
+set(gcf, 'color', [1,1,1]);
+set(gcf, 'InvertHardCopy', 'off');
+saveas(gcf, fullfile(dout,'srk_netgen_traj_a_raster.png'));
+
+
 %% SRK Netgen
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;
 X = srk_netgen_results.results.X_pred;
