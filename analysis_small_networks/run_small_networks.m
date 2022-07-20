@@ -2,8 +2,8 @@ clear;clc;close all;restoredefaultpath;
 addpath('../functions');
 
 
-
-Tmax = 1000000;
+dout = 'figures';
+Tmax = 400000;
 %% 2-Coupled
 
 %G = 0.45, gl = [100;60]
@@ -23,10 +23,26 @@ net = class_srk;
 net.make_network(gconns);
 net.y0 = net.y0 .* (1 + randn(size(net.y0)) /6);
 net.gl = [100;60];
-net.G  = 0.45;
+net.G  = 0.6;
 net.run_ode(Tmax);
 net.plot_me;
 
+figure();hold all;
+plot(net.t/60000, net.y(:,3), 'k', 'linewidth', 2);
+plot(net.t/60000, net.y(:,6), 'b', 'linewidth', 2);
+axis([1,6, 0, 1]);
+xticks([1, 6]);
+xticklabels([0,5]);
+yticks([0, 1]);
+yticklabels([0, 1]);
+H = gca;
+H.LineWidth = 2;
+H.FontSize = 16;
+H.FontWeight = 'bold';
+box on;
+set(gcf, 'color', [1,1,1]);
+set(gcf, 'InvertHardCopy', 'off');
+%saveas(gcf, fullfile(dout,'two_coupled_3_2_res.png'));
 
 %% 3 chain
 
@@ -48,14 +64,14 @@ net.plot_me;
 
 
 % p2 - p2 - p1 (network architecture)
-gcoup1 = 10; %p2 - p2
-gcoup2 = 10; %p2 - p1
-gconns = [0 gcoup1 0; gcoup1 0 gcoup2;0 gcoup2 0];
-net = class_srk;
-net.make_network(gconns);
-net.y0 = net.y0 .* (1 + randn(size(net.y0)) /6);
-net.gl = [100;100;60];
-net.G  = 0.4;
-net.run_ode(Tmax);
-net.plot_me;
+% gcoup1 = 10; %p2 - p2
+% gcoup2 = 10; %p2 - p1
+% gconns = [0 gcoup1 0; gcoup1 0 gcoup2;0 gcoup2 0];
+% net = class_srk;
+% net.make_network(gconns);
+% net.y0 = net.y0 .* (1 + randn(size(net.y0)) /6);
+% net.gl = [100;100;60];
+% net.G  = 0.4;
+% net.run_ode(Tmax);
+% net.plot_me;
 

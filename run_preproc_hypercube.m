@@ -1,4 +1,4 @@
-function results = run_preproc_hypercube(din)
+function results = run_preproc_hypercube(din, basisfun, kernelfun)
     load(fullfile(din, 'out_concat.mat'));
     load(fullfile(din, 'cube.mat'));
 
@@ -23,12 +23,12 @@ function results = run_preproc_hypercube(din)
         linspace(min(X(:)), max(X(:)),240), ...
         linspace(min(Y(:)), max(Y(:)), 240));
 
-    [res.pks_pred, ~, ~] = predict(fitrgp([X(:) Y(:)], pks_concat(:), "Standardize",1, 'BasisFunction','pureQuadratic', 'KernelFunction', 'ardmatern52'), [res.X_pred(:), res.Y_pred(:)]);
-    [res.ord_pred, ~, ~] = predict(fitrgp([X(:) Y(:)], ord_concat(:), "Standardize",1, 'BasisFunction','pureQuadratic', 'KernelFunction', 'ardmatern52'), [res.X_pred(:), res.Y_pred(:)]);
-    [res.pks_p1_pred, ~, ~] = predict(fitrgp([X(:) Y(:)], pks_p1_concat(:), "Standardize",1, 'BasisFunction','pureQuadratic', 'KernelFunction', 'ardmatern52'), [res.X_pred(:), res.Y_pred(:)]);
-    [res.pks_p2_pred, ~, ~] = predict(fitrgp([X(:) Y(:)], pks_p2_concat(:), "Standardize",1, 'BasisFunction','pureQuadratic', 'KernelFunction', 'ardmatern52'), [res.X_pred(:), res.Y_pred(:)]);
-    [res.ord_p1_pred, ~, ~] = predict(fitrgp([X(:) Y(:)], ord_p1_concat(:), "Standardize",1, 'BasisFunction','pureQuadratic', 'KernelFunction', 'ardmatern52'), [res.X_pred(:), res.Y_pred(:)]);
-    [res.ord_p2_pred, ~, ~] = predict(fitrgp([X(:) Y(:)], ord_p2_concat(:), "Standardize",1, 'BasisFunction','pureQuadratic', 'KernelFunction', 'ardmatern52'), [res.X_pred(:), res.Y_pred(:)]);
+    [res.pks_pred, ~, ~] = predict(fitrgp([X(:) Y(:)], pks_concat(:), "Standardize",1, 'BasisFunction',basisfun, 'KernelFunction', kernelfun), [res.X_pred(:), res.Y_pred(:)]);
+    [res.ord_pred, ~, ~] = predict(fitrgp([X(:) Y(:)], ord_concat(:), "Standardize",1, 'BasisFunction',basisfun, 'KernelFunction', kernelfun), [res.X_pred(:), res.Y_pred(:)]);
+    [res.pks_p1_pred, ~, ~] = predict(fitrgp([X(:) Y(:)], pks_p1_concat(:), "Standardize",1, 'BasisFunction',basisfun, 'KernelFunction', kernelfun), [res.X_pred(:), res.Y_pred(:)]);
+    [res.pks_p2_pred, ~, ~] = predict(fitrgp([X(:) Y(:)], pks_p2_concat(:), "Standardize",1, 'BasisFunction',basisfun, 'KernelFunction', kernelfun), [res.X_pred(:), res.Y_pred(:)]);
+    [res.ord_p1_pred, ~, ~] = predict(fitrgp([X(:) Y(:)], ord_p1_concat(:), "Standardize",1, 'BasisFunction',basisfun, 'KernelFunction', kernelfun), [res.X_pred(:), res.Y_pred(:)]);
+    [res.ord_p2_pred, ~, ~] = predict(fitrgp([X(:) Y(:)], ord_p2_concat(:), "Standardize",1, 'BasisFunction',basisfun, 'KernelFunction', kernelfun), [res.X_pred(:), res.Y_pred(:)]);
     res.pks_pred = reshape(res.pks_pred, size(res.X_pred));
     res.ord_pred = reshape(res.ord_pred, size(res.X_pred));
     res.pks_p1_pred = reshape(res.pks_p1_pred, size(res.X_pred));

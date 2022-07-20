@@ -1,18 +1,18 @@
 %%
 clear;clc;restoredefaultpath;close all;
-addpath('functions');
-addpath('functions_netgen');
-%load(fullfile('results_assort_netgen_forward_WS_locglo_p2', 'swap_01.mat'));
+addpath('../functions');
+addpath('../functions_netgen');
+load(fullfile('..','results_assort_netgen_forward_WS_locglo_p2', 'swap_01.mat'));
 
 %test_id = 4;
 %assort = assort{test_id};
 %pops = pops{test_id};
 %connections = conns{test_id};
 
-load(fullfile('results_single_netgen_attempt_fn_G_high', 'parameters.mat'));
-assort = assort_all;
-pops = pops_all;
-connections = config.net_conns;
+% load(fullfile('results_single_netgen_attempt_fn_G_high', 'parameters.mat'));
+% assort = assort_all;
+% pops = pops_all;
+% connections = config.net_conns;
 
 
 t = linspace(0, 2*pi, config.num_nodes+1);t = t(1:end-1);
