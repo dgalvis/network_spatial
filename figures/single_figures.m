@@ -37,7 +37,7 @@ for i = 1:length(sort_idx)
     title(['a = ',num2str(sort_idx(i)-1)]);
     H = gca;
     H.LineWidth = 2;
-    H.FontSize = 16;
+    H.FontSize = 20;
     H.FontWeight = 'bold';
     box on;
    
@@ -46,6 +46,7 @@ end
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
 saveas(gcf, fullfile(dout,'lattice.png'));
+saveas(gcf, fullfile(dout,'lattice.epsc'));
 
 % Colorbar
 hf = figure('Units','normalized'); 
@@ -59,9 +60,10 @@ c.Ticks = [0,1];
 c.TickLabels = {0,round(assort_all(sort_idx(end)),2)};
 hf.Position(4) = 0.1000;
 c.LineWidth = 2;
-ax.FontSize = 16;
+ax.FontSize = 20;
 ax.FontWeight = 'bold';
 saveas(gcf, fullfile(dout,'lattice_colorbar.png'));
+saveas(gcf, fullfile(dout,'lattice_colorbar.epsc'));
 %% Plot Structures (Netgen)
 pops_all = netgen_config.pops_all;
 assort_all =  netgen_config.assort_all;
@@ -84,8 +86,8 @@ for i = 1:length(sort_idx)
     
     x = sin(t);
     y = cos(t);
-    x(p) = 0.8*x(p);
-    y(p) = 0.8*y(p);
+    x(p) = 1*x(p);
+    y(p) = 1*y(p);
     
     
 %     for j = 1:num_nodes-1
@@ -99,15 +101,15 @@ for i = 1:length(sort_idx)
 %             end
 %         end
 %     end   
-    for j = 1:num_nodes-1
-        for k = (j+1):num_nodes
-            if connections(j,k) > 0
-                if p(j) ~= p(k)
-                   plot([x(j), x(k)], [y(j), y(k)], 'linewidth', 0.5, 'color', 'k');
-                end
-            end
-        end
-    end
+%     for j = 1:num_nodes-1
+%         for k = (j+1):num_nodes
+%             if connections(j,k) > 0
+%                 if p(j) ~= p(k)
+%                    plot([x(j), x(k)], [y(j), y(k)], 'linewidth', 0.5, 'color', 'k');
+%                 end
+%             end
+%         end
+%     end
     for j = 1:num_nodes-1
         for k = (j+1):num_nodes
             if connections(j,k) > 0
@@ -121,8 +123,8 @@ for i = 1:length(sort_idx)
     end
     
     
-    scatter(x(~p), y(~p), 10, 'k', 'filled');
-    scatter(x(p), y(p), 50, 'b', 'filled');
+    scatter(x(~p), y(~p), 20, 'k', 'filled');
+    scatter(x(p), y(p), 100, 'b', 'filled');
     
     xticks({});
     yticks({});
@@ -134,7 +136,7 @@ for i = 1:length(sort_idx)
     title(['a = ',num2str(sort_idx(i)-1)]);
     H = gca;
     H.LineWidth = 2;
-    H.FontSize = 16;
+    H.FontSize = 20;
     H.FontWeight = 'bold';
     box on;
         
@@ -142,6 +144,7 @@ end
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
 saveas(gcf, fullfile(dout,'netgen.png'));
+saveas(gcf, fullfile(dout,'netgen.epsc'));
 % Colorbar
 hf = figure('Units','normalized'); 
 ax = axes;
@@ -154,10 +157,10 @@ c.Ticks = [0,1];
 c.TickLabels = {0,round(assort_all(sort_idx(end)),2)};
 hf.Position(4) = 0.1000;
 c.LineWidth = 2;
-ax.FontSize = 16;
+ax.FontSize = 20;
 ax.FontWeight = 'bold';
 saveas(gcf, fullfile(dout,'netgen_colorbar.png'));
-
+saveas(gcf, fullfile(dout,'netgen_colorbar.epsc'));
 % Insets
 % Watts-Strogatz Networks
 sort_idx = [1, 315];
@@ -173,8 +176,8 @@ for i = 1:length(sort_idx)
     
     x = sin(t);
     y = cos(t);
-    x(p) = 0.8*x(p);
-    y(p) = 0.8*y(p);
+    x(p) = 1*x(p);
+    y(p) = 1*y(p);
     
     
 %     for j = 1:num_nodes-1
@@ -188,21 +191,21 @@ for i = 1:length(sort_idx)
 %             end
 %         end
 %     end   
-    for j = 1:num_nodes-1
-        for k = (j+1):num_nodes
-            if connections(j,k) > 0
-                if p(j) ~= p(k)
-                   plot([x(j), x(k)], [y(j), y(k)], 'linewidth', 0.5, 'color', 'k');
-                end
-            end
-        end
-    end
+%     for j = 1:num_nodes-1
+%         for k = (j+1):num_nodes
+%             if connections(j,k) > 0
+%                 if p(j) ~= p(k)
+%                    plot([x(j), x(k)], [y(j), y(k)], 'linewidth', 1, 'color', 'k');
+%                 end
+%             end
+%         end
+%     end
     for j = 1:num_nodes-1
         for k = (j+1):num_nodes
             if connections(j,k) > 0
                 if p(j) == p(k)
                     if p(j) > 0
-                        plot([x(j), x(k)], [y(j), y(k)], 'linewidth',1, 'color', 'b');
+                        plot([x(j), x(k)], [y(j), y(k)], 'linewidth',2, 'color', 'b');
                     end
                 end
             end
@@ -211,7 +214,7 @@ for i = 1:length(sort_idx)
     
     
     scatter(x(~p), y(~p), 20, 'k', 'filled');
-    scatter(x(p), y(p), 50, 'b', 'filled');
+    scatter(x(p), y(p), 100, 'b', 'filled');
     
     xticks({});
     yticks({});
@@ -223,34 +226,45 @@ for i = 1:length(sort_idx)
     title(['a = ',num2str(sort_idx(i)-1)]);
     H = gca;
     H.LineWidth = 2;
-    H.FontSize = 16;
+    H.FontSize = 20;
     H.FontWeight = 'bold';
     box on;
-    saveas(gcf, fullfile(dout,['netgen_inset_', num2str(sort_idx(i)),'.png']));    
+    set(gcf, 'color', [1,1,1]);
+    set(gcf, 'InvertHardCopy', 'off');
+    saveas(gcf, fullfile(dout,['netgen_inset_', num2str(sort_idx(i)),'.png'])); 
+    saveas(gcf, fullfile(dout,['netgen_inset_', num2str(sort_idx(i)),'.epsc'])); 
 end
 
 %% Heatmaps (Lattice)
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;
 surf(lattice_results.assort_concat, lattice_results.G_concat, lattice_results.pks_concat);
+xticks(round([0, max(lattice_results.assort_concat(:))], 2));
+yticks(round([min(lattice_results.G_concat(:)), max(lattice_results.G_concat(:))], 3));
 shading('flat');
 axis tight;
 H = gca;
 H.LineWidth = 2;
-H.FontSize = 16;
+H.FontSize = 20;
 H.FontWeight = 'bold';
+colorbar('XTick', round([min(lattice_results.pks_concat(:)), max(lattice_results.pks_concat(:))]))
 box on
 saveas(gcf, fullfile(dout,'lattice_heatmap.png'));
+saveas(gcf, fullfile(dout,'lattice_heatmap.epsc'));
 %% Heatmaps (WS)
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;
 surf(netgen_results.assort_concat, netgen_results.G_concat, netgen_results.pks_concat);
+xticks(round([0, max(netgen_results.assort_concat(:))], 2));
+yticks(round([min(netgen_results.G_concat(:)), max(netgen_results.G_concat(:))], 3));
 shading('flat');
 axis tight;
 H = gca;
 H.LineWidth = 2;
-H.FontSize = 16;
+H.FontSize = 20;
 H.FontWeight = 'bold';
+colorbar('XTick', round([min(netgen_results.pks_concat(:)), max(netgen_results.pks_concat(:))]))
 box on
 saveas(gcf, fullfile(dout,'netgen_heatmap.png'));
+saveas(gcf, fullfile(dout,'netgen_heatmap.epsc'));
 %% Trajectories (Lattice)
 
 figure('Renderer', 'painters', 'Position', [10, 10, 2000, 300]);
@@ -262,13 +276,15 @@ for i = 1:length(sort_idx)
     
     plot(net.sys.t_mean, net.sys.y_pops(:,1),'k', 'linewidth', 2);
     plot(net.sys.t_mean, net.sys.y_pops(:,2),'b', 'linewidth', 2);
+    xticks([0,500]);
+    yticks([-3, 3]);
     axis([0,500, -3, 3]);
     c = (1-max([round(assort_all(sort_idx(i)),2),0]));
     set(gca, 'color', [1,c,c]);
     title(['a = ',num2str(sort_idx(i)-1)]);
     H = gca;
     H.LineWidth = 2;
-    H.FontSize = 16;
+    H.FontSize = 20;
     H.FontWeight = 'bold';
     box on;
     
@@ -276,6 +292,7 @@ end
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
 saveas(gcf, fullfile(dout,'lattice_traj.png'));
+saveas(gcf, fullfile(dout,'lattice_traj.epsc'));
 %% Trajectories (WS)
 figure('Renderer', 'painters', 'Position', [10, 10, 2000, 300]);
 sort_idx = [1, 81, 151, 236, 315];
@@ -286,13 +303,15 @@ for i = 1:length(sort_idx)
     
     plot(net.t_mean, net.y_pops(:,1),'k', 'linewidth', 2);
     plot(net.t_mean, net.y_pops(:,2),'b', 'linewidth', 2);
+    xticks([0,500]);
+    yticks([-3, 3]);
     axis([0,500, -3, 3]);
     c = (1-max([round(assort_all(sort_idx(i)),2),0]));
     set(gca, 'color', [1,c,c]);
     title(['a = ',num2str(sort_idx(i)-1)]);
     H = gca;
     H.LineWidth = 2;
-    H.FontSize = 16;
+    H.FontSize = 20;
     H.FontWeight = 'bold';
     box on;
     
@@ -300,3 +319,4 @@ end
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
 saveas(gcf, fullfile(dout,'netgen_traj.png'));
+saveas(gcf, fullfile(dout,'netgen_traj.epsc'));

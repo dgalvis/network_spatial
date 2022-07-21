@@ -11,6 +11,8 @@
 *.svg
 *.eps
 *.fig
+*.ai
+*.epsc
 
 !**/cube.mat
 !**/out_concat.mat
