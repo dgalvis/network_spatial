@@ -32,7 +32,7 @@ colorbar('XTick', [min(Z(:)), max(Z(:))],'XTickLabel', [0, round(max(Z(:)))]);
 shading interp;
 H = gca;
 H.LineWidth = 2;
-H.FontSize = 16;
+H.FontSize = 20;
 H.FontWeight = 'bold';
 box on;
 
@@ -42,7 +42,7 @@ yticks([min(Y(:)), max(Y(:))]);
 yticklabels([round(min(Y(:)),2), round(max(Y(:)),2)]);
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
-saveas(gcf, fullfile(dout,'fn_lattice.png'));
+saveas(gcf, fullfile(dout,'fn_lattice.epsc'));
 
 %% SRK Lattice
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;
@@ -55,7 +55,7 @@ colorbar('XTick', [min(Z(:)), max(Z(:))],'XTickLabel', [0, round(max(Z(:)))]);
 shading interp;
 H = gca;
 H.LineWidth = 2;
-H.FontSize = 16;
+H.FontSize = 20;
 H.FontWeight = 'bold';
 box on;
 
@@ -65,7 +65,7 @@ yticks([min(Y(:)), max(Y(:))]);
 yticklabels([round(min(Y(:)),2), round(max(Y(:)),2)]);
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
-saveas(gcf, fullfile(dout,'srk_lattice.png'));
+saveas(gcf, fullfile(dout,'srk_lattice.epsc'));
 %% Trajectories FN Netgen
 fn_netgen_q = load(fullfile('..', 'results_netgen_attempt_fn_G_high', 'out_1.mat'));
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 300]);hold all;
@@ -83,12 +83,12 @@ c = (1-max([round(fn_netgen_q.assort,2),0]));
 set(gca, 'color', [1,c,c]);
 H = gca;
 H.LineWidth = 2;
-H.FontSize = 16;
+H.FontSize = 20;
 H.FontWeight = 'bold';
 box on;
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
-saveas(gcf, fullfile(dout,'fn_netgen_traj_q.png'));
+saveas(gcf, fullfile(dout,'fn_netgen_traj_q.epsc'));
 
 
 fn_netgen_a = load(fullfile('..', 'results_netgen_attempt_fn_G_high', 'out_7.mat'));
@@ -107,12 +107,12 @@ c = (1-max([round(fn_netgen_a.assort,2),0]));
 set(gca, 'color', [1,c,c]);
 H = gca;
 H.LineWidth = 2;
-H.FontSize = 16;
+H.FontSize = 20;
 H.FontWeight = 'bold';
 box on;
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
-saveas(gcf, fullfile(dout,'fn_netgen_traj_a.png'));
+saveas(gcf, fullfile(dout,'fn_netgen_traj_a.epsc'));
 
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 300]);hold all;
 make_raster(fn_netgen_a.net.pk_t, fn_netgen_a.net.pk_locs, fn_netgen_a.net.pops);
@@ -126,12 +126,12 @@ c = (1-max([round(fn_netgen_a.assort,2),0]));
 set(gca, 'color', [1,c,c]);
 H = gca;
 H.LineWidth = 2;
-H.FontSize = 16;
+H.FontSize = 20;
 H.FontWeight = 'bold';
 box on;
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
-saveas(gcf, fullfile(dout,'fn_netgen_traj_a_raster.png'));
+saveas(gcf, fullfile(dout,'fn_netgen_traj_a_raster.epsc'));
 
 %% FN WS
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;
@@ -144,7 +144,7 @@ colorbar('XTick', [min(Z(:)), max(Z(:))],'XTickLabel', [0, round(max(Z(:)))]);
 shading interp;
 H = gca;
 H.LineWidth = 2;
-H.FontSize = 16;
+H.FontSize = 20;
 H.FontWeight = 'bold';
 box on;
 
@@ -158,7 +158,31 @@ scatter(fn_netgen_a.assort, fn_netgen_a.pvals(1), 200, 'ks', 'filled');
 
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
-saveas(gcf, fullfile(dout,'fn_netgen.png'));
+saveas(gcf, fullfile(dout,'fn_netgen.epsc'));
+
+%% FN WS Without some stuff
+figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;
+X = fn_netgen_results.results.X_pred;
+Y = fn_netgen_results.results.Y_pred;
+Z = fn_netgen_results.results.pks_pred;
+pcolor(X,Y,Z);
+colorbar('XTick', [min(Z(:)), max(Z(:))],'XTickLabel', [0, round(max(Z(:)))]);
+shading interp;
+H = gca;
+H.LineWidth = 2;
+H.FontSize = 20;
+H.FontWeight = 'bold';
+box on;
+
+xticks([min(X(:)), max(X(:))]);
+xticklabels([round(min(X(:)),2), round(max(X(:)),2)]);
+yticks([min(Y(:)), max(Y(:))]);
+yticklabels([round(min(Y(:)),2), round(max(Y(:)),2)]);
+axis tight;
+
+set(gcf, 'color', [1,1,1]);
+set(gcf, 'InvertHardCopy', 'off');
+saveas(gcf, fullfile(dout,'fn_netgen_naked.epsc'));
 
 %% Trajectories SRK netgen
 srk_netgen_q = load(fullfile('..', 'results_netgen_attempt_srk_G_high', 'out_2.mat'));
@@ -177,13 +201,13 @@ c = (1-max([round(srk_netgen_q.assort,2),0]));
 set(gca, 'color', [1,c,c]);
 H = gca;
 H.LineWidth = 2;
-H.FontSize = 16;
+H.FontSize = 20;
 H.FontWeight = 'bold';
 box on;
 
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
-saveas(gcf, fullfile(dout,'srk_netgen_traj_q.png'));
+saveas(gcf, fullfile(dout,'srk_netgen_traj_q.epsc'));
 
 srk_netgen_a = load(fullfile('..', 'results_netgen_attempt_srk_G_high', 'out_8.mat'));
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 300]);hold all;
@@ -201,13 +225,13 @@ c = (1-max([round(srk_netgen_a.assort,2),0]));
 set(gca, 'color', [1,c,c]);
 H = gca;
 H.LineWidth = 2;
-H.FontSize = 16;
+H.FontSize = 20;
 H.FontWeight = 'bold';
 box on;
 
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
-saveas(gcf, fullfile(dout,'srk_netgen_traj_a.png'));
+saveas(gcf, fullfile(dout,'srk_netgen_traj_a.epsc'));
 
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 300]);hold all;
 make_raster(srk_netgen_a.net.pk_t/60000, srk_netgen_a.net.pk_locs, srk_netgen_a.net.pops);
@@ -221,12 +245,12 @@ c = (1-max([round(srk_netgen_a.assort,2),0]));
 set(gca, 'color', [1,c,c]);
 H = gca;
 H.LineWidth = 2;
-H.FontSize = 16;
+H.FontSize = 20;
 H.FontWeight = 'bold';
 box on;
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
-saveas(gcf, fullfile(dout,'srk_netgen_traj_a_raster.png'));
+saveas(gcf, fullfile(dout,'srk_netgen_traj_a_raster.epsc'));
 
 
 %% SRK Netgen
@@ -240,7 +264,7 @@ colorbar('XTick', [min(Z(:)), max(Z(:))],'XTickLabel', [0, round(max(Z(:)))]);
 shading interp;
 H = gca;
 H.LineWidth = 2;
-H.FontSize = 16;
+H.FontSize = 20;
 H.FontWeight = 'bold';
 box on;
 
@@ -254,7 +278,7 @@ scatter(srk_netgen_a.assort, srk_netgen_a.pvals(1), 200, 'ks', 'filled');
 
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
-saveas(gcf, fullfile(dout,'srk_netgen.png'));
+saveas(gcf, fullfile(dout,'srk_netgen.epsc'));
 %% Fn Netgen Data
 r = load(fullfile('..', 'results_netgen_attempt_fn_G_high', 'out_concat.mat'));
 X = fn_netgen_results.results.X_pred;
@@ -263,10 +287,10 @@ Z = fn_netgen_results.results.pks_pred;
 
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;
 scatter3(r.assort_concat, r.G_concat, r.pks_concat, 'k', 'filled');
-view([-75, 15]);
+view([60, 15]);
 H = gca;
 H.LineWidth = 2;
-H.FontSize = 16;
+H.FontSize = 20;
 H.FontWeight = 'bold';
 xticks([min(X(:)), max(X(:))]);
 xticklabels([round(min(X(:)),2), round(max(X(:)),2)]);
@@ -275,18 +299,19 @@ yticklabels([round(min(Y(:)),2), round(max(Y(:)),2)]);
 zticks([0, max(Z(:))]);
 zticklabels([0, round(max(Z(:)))]);
 box on;
+axis([min(X(:)), max(X(:)), min(Y(:)), max(Y(:)), min(Z(:)), max(Z(:))]);
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
-saveas(gcf, fullfile(dout,'fn_netgen_scatter.png'));
+saveas(gcf, fullfile(dout,'fn_netgen_scatter.epsc'));
 
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;
 
 scatter3(X(1:10:end),Y(1:10:end),Z(1:10:end), 'k', 'filled');
-view([-75, 15]);
+view([60, 15]);
 shading interp;
 H = gca;
 H.LineWidth = 2;
-H.FontSize = 16;
+H.FontSize = 20;
 H.FontWeight = 'bold';
 box on;
 
@@ -296,22 +321,23 @@ yticks([min(Y(:)), max(Y(:))]);
 yticklabels([round(min(Y(:)),2), round(max(Y(:)),2)]);
 zticks([0, max(Z(:))]);
 zticklabels([0, round(max(Z(:)))]);
+axis([min(X(:)), max(X(:)), min(Y(:)), max(Y(:)), min(Z(:)), max(Z(:))]);
 
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
-saveas(gcf, fullfile(dout,'fn_netgen_gp_scatter.png'));
+saveas(gcf, fullfile(dout,'fn_netgen_gp_scatter.epsc'));
 
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;
 X = fn_netgen_results.results.X_pred;
 Y = fn_netgen_results.results.Y_pred;
 Z = fn_netgen_results.results.pks_pred;
 surf(X,Y,Z);
-view([-75, 15]);
+view([60, 15]);
 
 shading interp;
 H = gca;
 H.LineWidth = 2;
-H.FontSize = 16;
+H.FontSize = 20;
 H.FontWeight = 'bold';
 box on;
 
@@ -321,10 +347,11 @@ yticks([min(Y(:)), max(Y(:))]);
 yticklabels([round(min(Y(:)),2), round(max(Y(:)),2)]);
 zticks([0, max(Z(:))]);
 zticklabels([0, round(max(Z(:)))]);
-
+axis([min(X(:)), max(X(:)), min(Y(:)), max(Y(:)), min(Z(:)), max(Z(:))]);
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
 saveas(gcf, fullfile(dout,'fn_netgen_gp_surf.png'));
+saveas(gcf, fullfile(dout,'fn_netgen_gp_surf.epsc'));
 %% FN WS beta
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;
 X1 = fn_netgen_results.results.X_pred;
@@ -344,7 +371,7 @@ contour(X3,Y3,Z3, [ (max(Z3(:))+min(Z3(:)))/2,  (max(Z3(:))+min(Z3(:)))/2], 'b',
 
 H = gca;
 H.LineWidth = 2;
-H.FontSize = 16;
+H.FontSize = 20;
 H.FontWeight = 'bold';
 box on;
 
@@ -355,7 +382,7 @@ yticklabels([round(min(Y1(:)),2), round(max(Y1(:)),2)]);
 
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
-saveas(gcf, fullfile(dout,'fn_netgen_rewire.png'));
+saveas(gcf, fullfile(dout,'fn_netgen_rewire.epsc'));
 
 
 
