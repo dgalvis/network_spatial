@@ -39,9 +39,9 @@
 function out = run_setup_netgen_config(name, seed, seed_swap)
 
     out.model = 'fn'; % 'fn' or 'srk'
-    out.num_pars = 10000;
+    out.num_pars = 20000;
     out.Gfracrng = [0.15, 0.345];
-    out.gconnrng = [0.02, 0.02];
+    out.gconnrng = [0.02, 0.1];
     
     
     out.poprng   = [0.1, 0.1]; % pop1 frac range

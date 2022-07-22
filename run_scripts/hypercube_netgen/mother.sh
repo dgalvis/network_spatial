@@ -51,6 +51,59 @@ sbatch run_model_netgen.sh 9201:9400 $1
 sbatch run_model_netgen.sh 9401:9600 $1
 sbatch run_model_netgen.sh 9601:9800 $1
 sbatch run_model_netgen.sh 9801:10000 $1
+
+sbatch run_model_netgen.sh 10001:10200 $1
+sbatch run_model_netgen.sh 10201:10400 $1
+sbatch run_model_netgen.sh 10401:10600 $1
+sbatch run_model_netgen.sh 10601:10800 $1
+sbatch run_model_netgen.sh 10801:11000 $1
+sbatch run_model_netgen.sh 11001:11200 $1
+sbatch run_model_netgen.sh 11201:11400 $1
+sbatch run_model_netgen.sh 11401:11600 $1
+sbatch run_model_netgen.sh 11601:11800 $1
+sbatch run_model_netgen.sh 11801:12000 $1
+sbatch run_model_netgen.sh 12001:12200 $1
+sbatch run_model_netgen.sh 12201:12400 $1
+sbatch run_model_netgen.sh 12401:12600 $1
+sbatch run_model_netgen.sh 12601:12800 $1
+sbatch run_model_netgen.sh 12801:13000 $1
+sbatch run_model_netgen.sh 13001:13200 $1
+sbatch run_model_netgen.sh 13201:13400 $1
+sbatch run_model_netgen.sh 13401:13600 $1
+sbatch run_model_netgen.sh 13601:13800 $1
+sbatch run_model_netgen.sh 13801:14000 $1
+sbatch run_model_netgen.sh 14001:14200 $1
+sbatch run_model_netgen.sh 14201:14400 $1
+sbatch run_model_netgen.sh 14401:14600 $1
+sbatch run_model_netgen.sh 14601:14800 $1
+sbatch run_model_netgen.sh 14801:15000 $1
+
+
+sbatch run_model_netgen.sh 15001:15200 $1
+sbatch run_model_netgen.sh 15201:15400 $1
+sbatch run_model_netgen.sh 15401:15600 $1
+sbatch run_model_netgen.sh 15601:15800 $1
+sbatch run_model_netgen.sh 15801:16000 $1
+sbatch run_model_netgen.sh 16001:16200 $1
+sbatch run_model_netgen.sh 16201:16400 $1
+sbatch run_model_netgen.sh 16401:16600 $1
+sbatch run_model_netgen.sh 16601:16800 $1
+sbatch run_model_netgen.sh 16801:17000 $1
+sbatch run_model_netgen.sh 17001:17200 $1
+sbatch run_model_netgen.sh 17201:17400 $1
+sbatch run_model_netgen.sh 17401:17600 $1
+sbatch run_model_netgen.sh 17601:17800 $1
+sbatch run_model_netgen.sh 17801:18000 $1
+sbatch run_model_netgen.sh 18001:18200 $1
+sbatch run_model_netgen.sh 18201:18400 $1
+sbatch run_model_netgen.sh 18401:18600 $1
+sbatch run_model_netgen.sh 18601:18800 $1
+sbatch run_model_netgen.sh 18801:19000 $1
+sbatch run_model_netgen.sh 19001:19200 $1
+sbatch run_model_netgen.sh 19201:19400 $1
+sbatch run_model_netgen.sh 19401:19600 $1
+sbatch run_model_netgen.sh 19601:19800 $1
+sbatch run_model_netgen.sh 19801:20000 $1
 # sbatch run_concat_netgen.sh $1
 
 
