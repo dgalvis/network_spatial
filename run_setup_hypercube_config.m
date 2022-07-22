@@ -39,21 +39,21 @@
 
 function out = run_setup_hypercube_config(name, seed, seed_swap)
 
-    out.model = 'fn'; % 'fn' or 'srk'
+    out.model = 'srk'; % 'fn' or 'srk'
     out.num_pars = 20000;
-    out.Gfracrng = [0.15, 0.3450];
-    out.gconnrng = [0.02, 0.1];
+    out.Gfracrng = [0.2, 0.6];
+    out.gconnrng = [2, 10];
     
     
     out.poprng   = [0.1, 0.1]; % pop1 frac range
     out.itrng    = [0, 250]; % swapper iteration range
     
-    out.gl1meanrng = [2, 2];
-    out.gl2meanrng = [1, 1];
+    out.gl1meanrng = [60, 60];
+    out.gl2meanrng = [100, 100];
     out.gl1stdrng = [0, 0];
     out.gl2stdrng = [0, 0];
     
-    out.Tmax = 6000;
+    out.Tmax = 500000;
     out.seed = seed; % seed for hypercube
     out.seed_swap = seed_swap; % seed for run_hypercube.m
     
