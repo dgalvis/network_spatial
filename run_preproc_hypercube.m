@@ -11,12 +11,12 @@ function results = run_preproc_hypercube(din, basisfun, kernelfun)
     end
 
     % Make order parameter 0 when there is no activity
-    idx = pks_concat < (0.01 * max(pks_concat));
-    ord_concat(idx) = 1e-7 * rand(length(sum(idx)), 1);
-    idx = pks_p1_concat < (0.01 * max(pks_p1_concat));
-    ord_p1_concat(idx) = 1e-7 * rand(length(sum(idx)), 1);
-    idx = pks_p2_concat < (0.01 * max(pks_p2_concat));
-    ord_p2_concat(idx) = 1e-7 * rand(length(sum(idx)), 1);
+    %idx = pks_concat < (0.01 * max(pks_concat));
+    %ord_concat(idx) = 1e-7 * rand(length(sum(idx)), 1);
+    %idx = pks_p1_concat < (0.01 * max(pks_p1_concat));
+    %ord_p1_concat(idx) = 1e-7 * rand(length(sum(idx)), 1);
+    %idx = pks_p2_concat < (0.01 * max(pks_p2_concat));
+    %ord_p2_concat(idx) = 1e-7 * rand(length(sum(idx)), 1);
 
     [res.X_pred, res.Y_pred] = ...
         meshgrid(...

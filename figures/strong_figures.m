@@ -52,6 +52,7 @@ Z = srk_lattice_results.results.pks_pred;
 pcolor(X,Y,Z);
 contour(X,Y,Z, [ (max(Z(:))+min(Z(:)))/2,  (max(Z(:))+min(Z(:)))/2], 'k', 'linewidth', 2);
 colorbar('XTick', [min(Z(:)), max(Z(:))],'XTickLabel', [0, round(max(Z(:)))]);
+caxis([0, 8.5])
 shading interp;
 H = gca;
 H.LineWidth = 2;
@@ -328,9 +329,6 @@ set(gcf, 'InvertHardCopy', 'off');
 saveas(gcf, fullfile(dout,'fn_netgen_gp_scatter.epsc'));
 
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;
-X = fn_netgen_results.results.X_pred;
-Y = fn_netgen_results.results.Y_pred;
-Z = fn_netgen_results.results.pks_pred;
 surf(X,Y,Z);
 view([60, 15]);
 
