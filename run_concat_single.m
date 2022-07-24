@@ -53,6 +53,8 @@ function run_concat_single(name)
         end
     end
     clear i j net pvals assort config assort_all;
-    save(fullfile(dout,'out_concat'));
+    save(fullfile(dout,'out_concat'), 'pks_concat', 'ord_concat', ...
+        'pks_p1_concat', 'pks_p2_concat', 'ord_p1_concat', 'ord_p2_concat', ...
+        'assort_concat', 'G_concat', 'gconn_concat');
 
 end

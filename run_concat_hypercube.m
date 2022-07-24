@@ -71,6 +71,8 @@ function run_concat_hypercube(name)
     ord_p2_concat = ord_p2_concat(success);
     
     clear i net pvals assort config;
-    save(fullfile(dout,'out_concat'));
+    save(fullfile(dout,'out_concat'), 'pks_concat', 'ord_concat', ...
+        'pks_p1_concat', 'pks_p2_concat', 'ord_p1_concat', 'ord_p2_concat', ...
+        'assort_concat', 'G_concat', 'gconn_concat', 'success', 'fails');
 
 end
