@@ -1024,7 +1024,7 @@ set(gcf, 'InvertHardCopy', 'off');
 saveas(gcf, fullfile(dout,'srk_netgen_peaks.png'));
 
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;
-Z = srk_netgen_results.results.ord_p1_pred;
+Z = srk_netgen_results.results.ord_pred;
 pcolor(X,Y,Z);
 %contour(X,Y,Z, [0.9, 0.9], 'k--', 'linewidth', 2);
 contour(X,Y,Zp1, [ (max(Zp1(:))+min(Zp1(:)))/2,  (max(Zp1(:))+min(Zp1(:)))/2], 'b', 'linewidth', 2);
