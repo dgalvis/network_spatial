@@ -5,8 +5,8 @@ addpath(fullfile('..','functions_netgen'));
 
 fn_netgen_config = load(fullfile('..', 'results_netgen_attempt_fn_G_high', 'cube.mat'));
 fn_lattice_config = load(fullfile('..', 'results_hypercube_attempt_fn_G_high', 'cube.mat'));
-srk_netgen_config = load(fullfile('..', 'results_netgen_attempt_srk_G_high', 'cube.mat'));
-srk_lattice_config = load(fullfile('..', 'results_hypercube_attempt_srk_G_high', 'cube.mat'));
+srk_netgen_config = load(fullfile('..', 'results_netgen_attempt_srk_G_high_longT', 'cube.mat'));
+srk_lattice_config = load(fullfile('..', 'results_hypercube_attempt_srk_G_high_longT', 'cube.mat'));
 
 fn_low_netgen_config = load(fullfile('..', 'results_netgen_attempt_fn_G_high_beta_low', 'cube.mat'));
 fn_high_netgen_config = load(fullfile('..', 'results_netgen_attempt_fn_G_high_beta_high', 'cube.mat'));
@@ -14,8 +14,8 @@ fn_high_netgen_config = load(fullfile('..', 'results_netgen_attempt_fn_G_high_be
 
 fn_netgen_results = load(fullfile('..', 'results_netgen_attempt_fn_G_high', 'out_gp.mat'));
 fn_lattice_results = load(fullfile('..', 'results_hypercube_attempt_fn_G_high', 'out_gp.mat'));
-srk_netgen_results = load(fullfile('..', 'results_netgen_attempt_srk_G_high', 'out_gp.mat'));
-srk_lattice_results = load(fullfile('..', 'results_hypercube_attempt_srk_G_high', 'out_gp.mat'));
+srk_netgen_results = load(fullfile('..', 'results_netgen_attempt_srk_G_high_longT', 'out_gp.mat'));
+srk_lattice_results = load(fullfile('..', 'results_hypercube_attempt_srk_G_high_longT', 'out_gp.mat'));
 
 fn_low_netgen_results = load(fullfile('..', 'results_netgen_attempt_fn_G_high_beta_low', 'out_gp.mat'));
 fn_high_netgen_results = load(fullfile('..', 'results_netgen_attempt_fn_G_high_beta_high', 'out_gp.mat'));
@@ -51,8 +51,8 @@ Y = srk_lattice_results.results.Y_pred;
 Z = srk_lattice_results.results.pks_pred;
 pcolor(X,Y,Z);
 contour(X,Y,Z, [ (max(Z(:))+min(Z(:)))/2,  (max(Z(:))+min(Z(:)))/2], 'k', 'linewidth', 2);
-colorbar('XTick', [min(Z(:)), max(Z(:))],'XTickLabel', [0, round(max(Z(:)))]);
-caxis([0, 8.5])
+colorbar('XTick', [0, round(max(Z(:)))],'XTickLabel', [0, round(max(Z(:)))]);
+caxis([0, round(max(Z(:)))])
 shading interp;
 H = gca;
 H.LineWidth = 2;
@@ -261,7 +261,8 @@ Y = srk_netgen_results.results.Y_pred;
 Z = srk_netgen_results.results.pks_pred;
 pcolor(X,Y,Z);
 contour(X,Y,Z, [ (max(Z(:))+min(Z(:)))/2,  (max(Z(:))+min(Z(:)))/2], 'k', 'linewidth', 2);
-colorbar('XTick', [min(Z(:)), max(Z(:))],'XTickLabel', [0, round(max(Z(:)))]);
+colorbar('XTick', [0, round(max(Z(:)))],'XTickLabel', [0, round(max(Z(:)))]);
+caxis([0, round(max(Z(:)))]);
 shading interp;
 H = gca;
 H.LineWidth = 2;
@@ -381,6 +382,29 @@ yticklabels([round(min(Y1(:)),2), round(max(Y1(:)),2)]);
 set(gcf, 'color', [1,1,1]);
 set(gcf, 'InvertHardCopy', 'off');
 saveas(gcf, fullfile(dout,'fn_netgen_rewire.epsc'));
+
+%% FN WS beta order
+figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;
+X1 = fn_netgen_results.results.X_pred;
+Y1 = fn_netgen_results.results.Y_pred;
+Z1 = fn_netgen_results.results.pks_pred;
+pcolor(X1,Y1,Z1);
+colorbar;
+shading interp;
+figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;
+X2 = fn_high_netgen_results.results.X_pred;
+Y2 = fn_high_netgen_results.results.Y_pred;
+Z2 = fn_high_netgen_results.results.pks_pred;
+pcolor(X2,Y2,Z2);
+colorbar;
+shading interp;
+figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;
+X3 = fn_low_netgen_results.results.X_pred;
+Y3 = fn_low_netgen_results.results.Y_pred;
+Z3 = fn_low_netgen_results.results.pks_pred;
+pcolor(X3,Y3,Z3);
+colorbar;
+shading interp;
 
 
 
