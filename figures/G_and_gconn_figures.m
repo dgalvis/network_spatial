@@ -182,6 +182,237 @@ exportgraphics(gcf, fullfile(dout,'fn_netgen_p0_peaks.png'), 'Resolution', 600);
 %saveas(gcf, fullfile(dout,'fn_netgen_p0_peaks.epsc'));
 
 
+%% Slice Traj
+
+fn_netgen_a1 = load(fullfile('..', 'results_netgen_attempt_fn_G_and_gconn_p0', 'out_161.mat'));
+figure('Renderer', 'painters', 'Position', [10, 10, 500, 300]);hold all;
+make_raster(fn_netgen_a1.net.pk_t, fn_netgen_a1.net.pk_locs, fn_netgen_a1.net.pops, 'order');
+axis tight
+xlim([0,500]);
+xticks([0,500]);
+xticklabels([0,500]);
+
+
+c = (1-max([round(fn_netgen_a1.assort,2),0]));
+set(gca, 'color', [1,c,c]);
+H = gca;
+H.LineWidth = 2;
+H.FontSize = 16;
+H.FontWeight = 'bold';
+box on;
+set(gcf, 'color', [1,1,1]);
+set(gcf, 'InvertHardCopy', 'off');
+saveas(gcf, fullfile(dout,'fn_netgen_traj_a1_raster.png'));
+saveas(gcf, fullfile(dout,'fn_netgen_traj_a1_raster.epsc'));
+
+fn_netgen_a2 = load(fullfile('..', 'results_netgen_attempt_fn_G_and_gconn_p0', 'out_105.mat'));
+figure('Renderer', 'painters', 'Position', [10, 10, 500, 300]);hold all;
+make_raster(fn_netgen_a2.net.pk_t, fn_netgen_a2.net.pk_locs, fn_netgen_a2.net.pops, 'order');
+axis tight
+xlim([0,500]);
+xticks([0,500]);
+xticklabels([0,500]);
+
+
+c = (1-max([round(fn_netgen_a2.assort,2),0]));
+set(gca, 'color', [1,c,c]);
+H = gca;
+H.LineWidth = 2;
+H.FontSize = 16;
+H.FontWeight = 'bold';
+box on;
+set(gcf, 'color', [1,1,1]);
+set(gcf, 'InvertHardCopy', 'off');
+saveas(gcf, fullfile(dout,'fn_netgen_traj_a2_raster.png'));
+saveas(gcf, fullfile(dout,'fn_netgen_traj_a2_raster.epsc'));
+
+
+fn_netgen_a3 = load(fullfile('..', 'results_netgen_attempt_fn_G_and_gconn_p0', 'out_6301.mat'));
+figure('Renderer', 'painters', 'Position', [10, 10, 500, 300]);hold all;
+make_raster(fn_netgen_a3.net.pk_t, fn_netgen_a3.net.pk_locs, fn_netgen_a3.net.pops, 'order');
+axis tight
+xlim([0,500]);
+xticks([0,500]);
+xticklabels([0,500]);
+
+
+c = (1-max([round(fn_netgen_a3.assort,2),0]));
+set(gca, 'color', [1,c,c]);
+H = gca;
+H.LineWidth = 2;
+H.FontSize = 16;
+H.FontWeight = 'bold';
+box on;
+set(gcf, 'color', [1,1,1]);
+set(gcf, 'InvertHardCopy', 'off');
+saveas(gcf, fullfile(dout,'fn_netgen_traj_a3_raster.png'));
+saveas(gcf, fullfile(dout,'fn_netgen_traj_a3_raster.epsc'));
+
+fn_netgen_a4 = load(fullfile('..', 'results_netgen_attempt_fn_G_and_gconn_p0', 'out_2534.mat'));
+figure('Renderer', 'painters', 'Position', [10, 10, 500, 300]);hold all;
+make_raster(fn_netgen_a4.net.pk_t, fn_netgen_a4.net.pk_locs, fn_netgen_a4.net.pops, 'order');
+axis tight
+xlim([0,500]);
+xticks([0,500]);
+xticklabels([0,500]);
+
+
+c = (1-max([round(fn_netgen_a4.assort,2),0]));
+set(gca, 'color', [1,c,c]);
+H = gca;
+H.LineWidth = 2;
+H.FontSize = 16;
+H.FontWeight = 'bold';
+box on;
+set(gcf, 'color', [1,1,1]);
+set(gcf, 'InvertHardCopy', 'off');
+saveas(gcf, fullfile(dout,'fn_netgen_traj_a4_raster.png'));
+saveas(gcf, fullfile(dout,'fn_netgen_traj_a4_raster.epsc'));
+
+
+% r = load(fullfile('..', 'results_netgen_attempt_fn_G_and_gconn_p0', 'out_concat.mat'));
+% x = find(r.gconn_concat > 0.099  & r.G_concat < 0.2 & r.assort_concat > 0.7)';
+% %x = find(r.gconn_concat < 0.021)';
+% for i = x
+%     
+%     fn_netgen_a4 = load(fullfile('..', 'results_netgen_attempt_fn_G_and_gconn_p0', ['out_', num2str(i),'.mat']));
+%     figure('Renderer', 'painters', 'Position', [10, 10, 500, 300]);hold all;
+%     make_raster(fn_netgen_a4.net.pk_t, fn_netgen_a4.net.pk_locs, fn_netgen_a4.net.pops, 'order');
+%     axis tight
+%     xlim([0,500]);
+%     xticks([0,500]);
+%     xticklabels([0,500]);
+% 
+% 
+%     c = (1-max([round(fn_netgen_a4.assort,2),0]));
+%     set(gca, 'color', [1,c,c]);
+%     H = gca;
+%     H.LineWidth = 2;
+%     H.FontSize = 16;
+%     H.FontWeight = 'bold';
+%     box on;
+%     
+%     title(num2str(i));
+%     pause;
+%     
+% end
+
+
+
+%%  FN Netgen Peaks P0 (slice 1)
+figure('Renderer', 'painters', 'Position', [10, 10, 500, 500], 'Units', 'points');hold all;
+X = fn_netgen_p0_results.results.X_pred;
+Y1 = fn_netgen_p0_results.results.Y1_pred;
+Y2 = fn_netgen_p0_results.results.Y2_pred;
+Z = fn_netgen_p0_results.results.pks_pred;
+Z_ord = fn_netgen_p0_results.results.ord_pred;
+
+
+X = squeeze(X(end, :, :));
+Y1 = squeeze(Y1(end,:, :));
+Y2 = squeeze(Y2(end,:, :));
+Z = squeeze(Z(end,:, :));
+Z_ord = squeeze(Z_ord(end,:, :));
+
+
+subplot(221);hold all;
+pcolor(X, Y2, Z);
+shading interp;
+axis tight;
+contour(X,Y2,Z, [ (max(Z(:))+min(Z(:)))/2,  (max(Z(:))+min(Z(:)))/2] , 'k', 'linewidth', 2);
+colorbar('XTick', [min(Z(:)), max(Z(:))],'XTickLabel', [0, round(max(Z(:)))]);
+shading interp;
+H = gca;
+H.LineWidth = 2;
+H.FontSize = 12;
+H.FontWeight = 'bold';
+box on;
+
+scatter(fn_netgen_a3.assort, fn_netgen_a3.pvals(1), 100, 'ks', 'filled');
+scatter(fn_netgen_a4.assort, fn_netgen_a4.pvals(1), 100, 'kd', 'filled');
+
+xticks([min(X(:)), max(X(:))]);
+xticklabels([round(min(X(:)),2), round(max(X(:)),2)]);
+yticks([min(Y2(:)), max(Y2(:))]);
+yticklabels([round(min(Y2(:)),2), round(max(Y2(:)),2)]);
+
+subplot(222);hold all;
+pcolor(X, Y2, Z_ord);
+shading interp;
+axis tight;
+contour(X,Y2,Z, [ (max(Z(:))+min(Z(:)))/2,  (max(Z(:))+min(Z(:)))/2], 'k', 'linewidth', 2);
+colorbar('XTick', [0, 1],'XTickLabel', [0, 1]);
+caxis([0,1]);
+shading interp;
+H = gca;
+H.LineWidth = 2;
+H.FontSize = 12;
+H.FontWeight = 'bold';
+box on;
+
+scatter(fn_netgen_a3.assort, fn_netgen_a3.pvals(1), 100, 'ks', 'filled');
+scatter(fn_netgen_a4.assort, fn_netgen_a4.pvals(1), 100, 'kd', 'filled');
+
+xticks([min(X(:)), max(X(:))]);
+xticklabels([round(min(X(:)),2), round(max(X(:)),2)]);
+yticks([min(Y2(:)), max(Y2(:))]);
+yticklabels([round(min(Y2(:)),2), round(max(Y2(:)),2)]);
+
+X = fn_netgen_p0_results.results.X_pred;
+Y1 = fn_netgen_p0_results.results.Y1_pred;
+Y2 = fn_netgen_p0_results.results.Y2_pred;
+Z = fn_netgen_p0_results.results.pks_pred;
+Z_ord = fn_netgen_p0_results.results.ord_pred;
+
+X = squeeze(X(1, :, :));
+Y1 = squeeze(Y1(1,:, :));
+Y2 = squeeze(Y2(1,:, :));
+Z = squeeze(Z(1,:, :));
+Z_ord = squeeze(Z_ord(1,:, :));
+
+subplot(223);hold all;
+pcolor(X, Y2, Z);
+shading interp;
+axis tight;
+contour(X,Y2,Z, [ (max(Z(:))+min(Z(:)))/2,  (max(Z(:))+min(Z(:)))/2] , 'k', 'linewidth', 2);
+colorbar('XTick', [min(Z(:)), max(Z(:))],'XTickLabel', [0, round(max(Z(:)))]);
+shading interp;
+H = gca;
+H.LineWidth = 2;
+H.FontSize = 12;
+H.FontWeight = 'bold';
+box on;
+
+scatter(fn_netgen_a1.assort, fn_netgen_a1.pvals(1), 100, 'ko', 'filled');
+scatter(fn_netgen_a2.assort, fn_netgen_a2.pvals(1), 100, 'k^', 'filled');
+xticks([min(X(:)), max(X(:))]);
+xticklabels([round(min(X(:)),2), round(max(X(:)),2)]);
+yticks([min(Y2(:)), max(Y2(:))]);
+yticklabels([round(min(Y2(:)),2), round(max(Y2(:)),2)]);
+
+subplot(224);hold all;
+pcolor(X, Y2, Z_ord);
+shading interp;
+axis tight;
+contour(X,Y2,Z, [ (max(Z(:))+min(Z(:)))/2,  (max(Z(:))+min(Z(:)))/2], 'k', 'linewidth', 2);
+colorbar('XTick', [0, 1],'XTickLabel', [0, 1]);
+caxis([0,1]);
+shading interp;
+H = gca;
+H.LineWidth = 2;
+H.FontSize = 12;
+H.FontWeight = 'bold';
+box on;
+
+scatter(fn_netgen_a1.assort, fn_netgen_a1.pvals(1), 100, 'ko', 'filled');
+scatter(fn_netgen_a2.assort, fn_netgen_a2.pvals(1), 100, 'k^', 'filled');
+xticks([min(X(:)), max(X(:))]);
+xticklabels([round(min(X(:)),2), round(max(X(:)),2)]);
+yticks([min(Y2(:)), max(Y2(:))]);
+yticklabels([round(min(Y2(:)),2), round(max(Y2(:)),2)]);
+
+saveas(gcf, fullfile(dout,'fn_netgen_p0_slices.epsc'));
+
 %% FN Netgen Order P0
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 500], 'Units', 'points');hold all;
 X = fn_netgen_p0_results.results.X_pred;

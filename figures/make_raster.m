@@ -29,7 +29,7 @@ function make_raster(pk_t, pk_locs, pops, flag, order)
             idx = find(pk_locs(:,i));
 
             if pops(i)
-                scatter(t(idx), ct1*ones(size(t(idx))), 10, 'filled', 'b');
+                scatter(t(idx), ct1*ones(size(t(idx))), 30, 'filled', 'b');
 
             else
                 scatter(t(idx), ct1*ones(size(t(idx))), 10, 'filled', 'k');
