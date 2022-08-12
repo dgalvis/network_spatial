@@ -13,7 +13,7 @@ fn_lattice_results = load(fullfile('..', 'results_hypercube_attempt_fn_G_mid', '
 srk_netgen_results = load(fullfile('..', 'results_netgen_attempt_srk_G_mid', 'out_gp.mat'));
 srk_lattice_results = load(fullfile('..', 'results_hypercube_attempt_srk_G_mid', 'out_gp.mat'));
 
-dout = 'mid_figures';
+dout = 'mid_figures_old';
 
 %% Trajectories FN Lattice
 fn_lattice_q = load(fullfile('..', 'results_hypercube_attempt_fn_G_mid', 'out_1.mat'));

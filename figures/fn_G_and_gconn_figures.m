@@ -11,7 +11,7 @@ fn_netgen_results = load(fullfile('..', 'results_netgen_attempt_fn_G_and_gconn',
 fn_netgen_p0_results = load(fullfile('..', 'results_netgen_attempt_fn_G_and_gconn_p0', 'out_gp.mat'));
 fn_hypercube_results = load(fullfile('..', 'results_hypercube_attempt_fn_G_and_gconn', 'out_gp.mat'));
 
-dout = 'G_and_gconn_figures';
+dout = 'fn_G_and_gconn_figures';
 
 
 

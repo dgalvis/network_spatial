@@ -13,7 +13,7 @@ fn_lattice_results = load(fullfile('..', 'results_hypercube_attempt_fn_gconn', '
 srk_netgen_results = load(fullfile('..', 'results_netgen_attempt_srk_gconn', 'out_gp.mat'));
 srk_lattice_results = load(fullfile('..', 'results_hypercube_attempt_srk_gconn', 'out_gp.mat'));
 
-dout = 'gconn_figures';
+dout = 'gconn_figures_old';
 
 %% FN Lattice
 figure('Renderer', 'painters', 'Position', [10, 10, 500, 500]);hold all;

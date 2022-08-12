@@ -5,15 +5,16 @@ addpath(fullfile('..','functions_netgen'));
 
 fn_netgen_config = load(fullfile('..', 'results_netgen_attempt_fn_G_mid', 'cube.mat'));
 fn_lattice_config = load(fullfile('..', 'results_hypercube_attempt_fn_G_mid', 'cube.mat'));
-srk_netgen_config = load(fullfile('..', 'results_netgen_attempt_srk_G_mid', 'cube.mat'));
-srk_lattice_config = load(fullfile('..', 'results_hypercube_attempt_srk_G_mid', 'cube.mat'));
 
 fn_netgen_results = load(fullfile('..', 'results_netgen_attempt_fn_G_mid', 'out_gp.mat'));
 fn_lattice_results = load(fullfile('..', 'results_hypercube_attempt_fn_G_mid', 'out_gp.mat'));
-srk_netgen_results = load(fullfile('..', 'results_netgen_attempt_srk_G_mid', 'out_gp.mat'));
-srk_lattice_results = load(fullfile('..', 'results_hypercube_attempt_srk_G_mid', 'out_gp.mat'));
 
-dout = 'mid_figures';
+%srk_netgen_config = load(fullfile('..', 'results_netgen_attempt_srk_G_mid', 'cube.mat'));
+%srk_lattice_config = load(fullfile('..', 'results_hypercube_attempt_srk_G_mid', 'cube.mat'));
+%srk_netgen_results = load(fullfile('..', 'results_netgen_attempt_srk_G_mid', 'out_gp.mat'));
+%srk_lattice_results = load(fullfile('..', 'results_hypercube_attempt_srk_G_mid', 'out_gp.mat'));
+
+dout = 'fn_mid_figures';
 
 % r = load(fullfile('..', 'results_hypercube_attempt_fn_G_mid', 'out_concat.mat'));
 % for i = 1:1000
