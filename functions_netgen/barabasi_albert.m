@@ -15,7 +15,7 @@ while pos < Nodes
     pos = pos + 1;
     linkage = 0;
     while linkage ~= mlinks
-        rnode = ceil(rand * (pos-1));
+        rnode = ceil(rand * (pos - 1));% pos - self conns, pos -1 - no self conns
         deg = sum(Net(:,rnode)) * 2;
         rlink = rand * 1;
         if rlink < deg / sumlinks && Net(pos,rnode) ~= 1 && Net(rnode,pos) ~= 1
